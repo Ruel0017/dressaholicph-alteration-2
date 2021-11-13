@@ -103,6 +103,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('user.appointment') }}"
+                                class="nav-link {{ request()->is('user/appointment*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-calendar"></i>
+                                <p>
+                                    Apppointment
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -128,13 +137,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                Anything you want
-            </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-            reserved.
+            <strong>Copyright &copy; 2021 Dressaholichph</strong>
         </footer>
     </div>
     <!-- ./wrapper -->

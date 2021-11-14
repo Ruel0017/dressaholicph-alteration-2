@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\clothe;
+use App\Models\fabric;
 use App\Models\repair;
-use App\Models\types_of_clothe;
-use App\Models\types_of_fabric;
-use App\Models\types_of_repair;
+
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -19,9 +19,9 @@ class AppointmentController extends Controller
     public function index()
     {
 
-        $repair = types_of_repair::all();
-        $clothe = types_of_clothe::all();
-        $fabric = types_of_fabric::all();
+        $repair = repair::all();
+        $clothe = clothe::all();
+        $fabric = fabric::all();
 
         // dd($fabric);
 

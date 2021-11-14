@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class types_of_fabric extends Model
+class repair extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,6 @@ class types_of_fabric extends Model
     public $timestamp = true;
 
     protected $fillable = [
-        'fabricName',
+        'repairName',
     ];
 }

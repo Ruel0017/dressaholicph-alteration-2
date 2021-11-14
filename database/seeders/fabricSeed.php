@@ -39,6 +39,6 @@ class fabricSeed extends Seeder
             ]
         ];
 
-        DB::table('types_of_fabrics')->insert($fabric);
+        DB::table('fabrics')->insert($fabric);
     }
 }

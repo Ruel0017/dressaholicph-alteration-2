@@ -59,6 +59,6 @@ class repairSeed extends Seeder
             ],
         ];
 
-        DB::table('types_of_repairs')->insert($repair);
+        DB::table('repairs')->insert($repair);
     }
 }

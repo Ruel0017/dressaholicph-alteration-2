@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypesOfRepair extends Migration
+class CreateClothesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTypesOfRepair extends Migration
      */
     public function up()
     {
-        Schema::create('types_of_repair', function (Blueprint $table) {
+        Schema::create('clothes', function (Blueprint $table) {
             $table->id();
-            $table->string('repairName');
+            $table->string('clothesName');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateTypesOfRepair extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types_of_repair');
+        Schema::dropIfExists('clothes');
     }
 }

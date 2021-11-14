@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class types_of_clothe extends Model
+class clothe extends Model
 {
     use HasFactory;
 
@@ -20,11 +20,11 @@ class types_of_clothe extends Model
 
     public function repair()
     {
-        return $this->hasMany(types_of_repair::class, 'id', 'id');
+        return $this->hasMany(repair::class, 'id', 'id');
     }
 
     public function fabric()
     {
-        return $this->hasMany(types_of_fabric::class, 'id', 'id');
+        return $this->hasMany(fabric::class, 'id', 'id');
     }
 }

@@ -73,6 +73,6 @@ class clothesSeeder extends Seeder
             ],
         ];
 
-        DB::table('types_of_clothes')->insert($clothes);
+        DB::table('clothes')->insert($clothes);
     }
 }

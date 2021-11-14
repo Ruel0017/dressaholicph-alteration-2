@@ -108,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 class="nav-link {{ request()->is('user/appointment*') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-calendar"></i>
                                 <p>
-                                    Apppointment
+                                    Appointment
                                 </p>
                             </a>
                         </li>

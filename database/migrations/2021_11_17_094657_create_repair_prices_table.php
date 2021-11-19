@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppointmentComputation extends Migration
+class CreateRepairPricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateAppointmentComputation extends Migration
      */
     public function up()
     {
-        Schema::create('appointment_computation', function (Blueprint $table) {
+        Schema::create('repair_prices', function (Blueprint $table) {
             $table->id();
-            $table->decimal('payableDesc');
-            $table->decimal('payableAmount');
+            $table->integer('clothes_id');
+            $table->integer('repair_id');
+            $table->decimal('amount');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateAppointmentComputation extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appointment_computation');
+        Schema::dropIfExists('repair_prices');
     }
 }

@@ -15,6 +15,7 @@ class clothe extends Model
 
     protected $fillable = [
         'clothesName',
+        'amount',
     ];
 
 

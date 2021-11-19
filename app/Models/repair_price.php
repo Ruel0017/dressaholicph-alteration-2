@@ -5,22 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class appointment extends Model
+class repair_price extends Model
 {
     use HasFactory;
+
 
     protected $primaryKey = 'id';
 
     public $timestamp = true;
 
     protected $fillable = [
-        'user_id',
-        'isActive',
         'clothes_id',
         'repair_id',
-        'fabric_id',
-        'appointment_date',
-        'totalAmount',
-        'approvedBy',
+        'amount',
     ];
+
+    public function clothes()
+    {
+        return $this->hasMany(clothe::class, 'clothes_id', 'id');
+    }
+
+    public function repair()
+    {
+        return $this->hasMany(repair::class, 'repair_id', 'id');
+    }
 }

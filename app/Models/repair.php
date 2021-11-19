@@ -15,5 +15,6 @@ class repair extends Model
 
     protected $fillable = [
         'repairName',
+        'amount',
     ];
 }

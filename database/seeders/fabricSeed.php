@@ -36,6 +36,10 @@ class fabricSeed extends Seeder
             [
                 'fabricName' => 'Uniform Fabric',
                 'created_at' => Carbon::now(),
+            ],
+            [
+                'fabricName' => 'Not Available',
+                'created_at' => Carbon::now(),
             ]
         ];
 

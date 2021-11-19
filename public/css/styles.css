@@ -1,0 +1,7 @@
+.calendarspan {
+    float: left;
+    margin-left: 20px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+}

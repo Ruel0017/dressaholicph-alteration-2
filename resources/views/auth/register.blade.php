@@ -39,7 +39,7 @@
 
                                 <div class="form-group">
                                     <label for="fname">First Name</label>
-                                    <input id="fname" type="text" class="form-control" name="fname" required autofocus
+                                    <input id="fname" type="text" class="form-control" name="fname" required
                                         placeholder="First Name">
                                     <span class="text-danger">@error('fname'){{ $message }}@enderror</span>
                                     </div>
@@ -152,6 +152,15 @@
                                                                         crossorigin="anonymous">
                                     </script>
                                     <script src="js/my-login.js"></script>
+                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                                    <script type="text/javascript">
+                                        $('input[name="mobilenumber"]').keyup(function(e) {
+                                            if (/\D/g.test(this.value)) {
+                                                // Filter non-digits from input value.
+                                                this.value = this.value.replace(/\D/g, '');
+                                            }
+                                        });
+                                    </script>
                                 </body>
 
                                 </html>

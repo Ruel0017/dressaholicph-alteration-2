@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(clothesSeeder::class);
         $this->call(repairSeed::class);
         $this->call(fabricSeed::class);
+        $this->call(repairPricesSeed::class);
     }
 }

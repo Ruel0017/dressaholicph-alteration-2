@@ -9,55 +9,179 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form>
+        <form method="POST" action="{{ route('user.CreateAppointment') }}">
+            @if (Session::get('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+            @if (Session::get('error'))
+                <div class="alert alert-danger">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
+            @csrf
             <div class="card-body">
-
-                
                 <div class="form-group">
-                    <label for="repair">Date Today</label>
-                    <input class="form-control" type="text" id='dateToday' readonly />
-                </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="date">Date</label>
+                            <input class="date form-control text-right" type="text" id='date'>
+                            <span class="fa fa-calendar calendarspan"></span>
+                        </div>
 
-                <div class="form-group">
-                    <label for="repair">Types of Dress/Clothes</label>
-                    <select class="form-control" name="repair">
-                        <option selected value="">Please Select Dress/Clothes</option>
-                        @foreach ($clothe as $clothes)
-                            <option value="{{ $clothes->id }}">{{ $clothes->clothesName }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                        <div class="col-6">
+                            <label for="time">Time</label>
+                            <select class="form-control text-left" name="time">
+                                <option selected value="">Please Select Your Time</option>
+                                <option value="8:00 AM">8:00 AM</option>
+                                <option value="9:00 AM">9:00 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="1:00 PM">1:00 PM</option>
+                                <option value="2:00 PM">2:00 PM</option>
+                                <option value="3:00 PM">3:00 PM</option>
+                                <option value="4:00 PM">4:00 PM</option>
+                                <option value="5:00 PM">5:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="repair">Types of Repair</label>
-                    <select class="form-control" name="repair">
-                        <option selected value="">Please Select Types of Repair</option>
-                        @foreach ($repair as $repairs)
-                            <option value="{{ $repairs->id }}">{{ $repairs->repairName }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    <input class="col-6" type="text" name="appointment_date" hidden>
+                    <span class="text-danger">@error('appointment_date'){{ $message }}@enderror</span>
+                    </div>
 
-                <div class="form-group">
-                    <label for="repair">Types of Fabric</label>
-                    <select class="form-control" name="repair">
-                        <option selected value="">Please Select Types of Fabric</option>
-                        @foreach ($fabric as $fabrics)
-                            <option value="{{ $fabrics->id }}">{{ $fabrics->fabricName }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <!-- /.card-body -->
+                    <div class="form-group">
+                        <label for="repair">Types of Dress/Clothes</label>
+                        <select class="form-control clothes" name="clothes" id="clothes">
+                            <option selected value="">Please Select Dress/Clothes</option>
+                            @foreach ($clothe as $clothes)
+                                <option value="{{ $clothes->id }}">{{ $clothes->clothesName }}</option>
+                            @endforeach
+                        </select>
+                        <span class="text-danger">@error('clothes'){{ $message }}@enderror</span>
 
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-    </div>
+                        </div>
 
-    <script type="text/javascript">
-        const today = new Date().toISOString().slice(0, 10)
-        document.getElementById('dateToday').value = today;
-    </script>
-@endsection
+                        <div class="form-group">
+                            <label for="repair">Types of Repair</label>
+                            <select class="form-control" name="repair" id="repair" disabled>
+                                <option selected value="">Please Select Types of Repair</option>
+                            </select>
+
+                            <span class="text-danger">@error('repair'){{ $message }}@enderror</span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="repair">Types of Fabric</label>
+                                <select class="form-control" name="fabric">
+                                    <option selected value="">Please Select Types of Fabric</option>
+                                    @foreach ($fabric as $fabrics)
+                                        <option value="{{ $fabrics->id }}">{{ $fabrics->fabricName }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger">@error('fabric'){{ $message }}@enderror</span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="amount">Total Amount</label>
+                                    <span></span>
+                                    <input class="form-control" type="text" name="amount" id="amount" value="" readonly>
+                                </div>
+
+                                {{-- <input class="form-control" type="text" name="" value="{{$repairPrice}}" readonly> --}}
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <script type="text/javascript">
+                        //Date picker
+                        var date = new Date();
+                        date.setDate(date.getDate());
+
+                        let input = $('[name = "date"],[name = "time"]')
+                        let appointmentDate = $("input[name='date']");
+                        let appointmentTime = $('[name = "time"]');
+                        let appointmentDateTime = $('[name = "appointment_date"]');
+
+                        $('.date').datepicker({
+                            startDate: date,
+                            format: 'yyyy-mm-dd',
+                        });
+
+                        input.change(function() {
+                            appointmentDateTime.val($('.date').val() + ' ' + appointmentTime.val());
+                        })
+
+                        $(document).ready(function() {
+                            $('#clothes').on('change', function() {
+                                var clothesID = $(this).val();
+                                if (clothesID) {
+                                    $.ajax({
+                                        url: 'user/getPrice/' + clothesID,
+                                        type: "GET",
+                                        dataType: "json",
+                                        success: function(data) {
+                                            if (data) {
+                                                console.log(data);
+                                                $('#repair').empty();
+                                                $('#repair').append('<option hidden>Types of Repair</option>');
+                                                $('#repair').disabe
+                                                $.each(data, function(key, repairPriceDB) {
+                                                    $('select[name="repair"]').prop('disabled', false)
+                                                        .append(
+                                                            '<option value="' + repairPriceDB.id +
+                                                            '">' +
+                                                            repairPriceDB.repairName + '</option>');
+                                                });
+                                            } else {
+                                                console.log('error to tanga')
+                                                $('#repair').empty();
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    $('#repair').empty();
+                                }
+                            });
+                        });
+
+                        $(document).ready(function() {
+                            var a = [];
+                            $('#repair').on('change', function() {
+                                var repairID = $(this).val();
+                                if (repairID) {
+                                    $.ajax({
+                                        url: 'user/getAmount/' + repairID,
+                                        type: "GET",
+                                        dataType: "json",
+                                        success: function(data) {
+                                            if (data) {
+                                                $('#amount').empty();
+                                                $.each(data, function(repairAmount) {
+                                                    for (i in data) {
+                                                        a.push(data[i].amount);
+                                                    }
+                                                    // console.log(a[0]);
+                                                    $('input[name=amount]').val(a[0]);
+                                                });
+                                            } else {
+                                                console.log('error to tanga')
+                                                $('#repair').empty();
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    $('#repair').empty();
+                                }
+                            });
+                        });
+                    </script>
+                @endsection

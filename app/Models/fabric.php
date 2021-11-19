@@ -15,5 +15,6 @@ class fabric extends Model
 
     protected $fillable = [
         'fabricName',
+        'amount',
     ];
 }

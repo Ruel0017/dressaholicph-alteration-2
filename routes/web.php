@@ -44,5 +44,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::get('dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
     Route::get('settings', [UserController::class, 'settings'])->name('user.settings');
-    route::get('appointment', [AppointmentController::class, 'index'])->name('user.appointment');
+    Route::get('appointment', [AppointmentController::class, 'index'])->name('user.appointment');
+    Route::post('appointment', [AppointmentController::class, 'store'])->name('user.CreateAppointment');
+    Route::get('appointment-list', [AppointmentController::class, 'listOfAppointment'])->name('user.listofappointment');
+
+    //AJAX
+    Route::GET('getPrice/{id}', [AppointmentController::class, 'getPrice']);
+    Route::GET('getAmount/{id}', [AppointmentController::class, 'getAmount']);
 });

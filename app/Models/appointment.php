@@ -23,4 +23,19 @@ class appointment extends Model
         'totalAmount',
         'approvedBy',
     ];
+
+    public function clothes()
+    {
+        return $this->belongsTo(clothe::class, 'clothes_id', 'id');
+    }
+
+    public function repair()
+    {
+        return $this->belongsTo(repair::class, 'repair_id', 'id');
+    }
+
+    public function fabric()
+    {
+        return $this->belongsTo(fabric::class, 'id', 'fabric_id');
+    }
 }

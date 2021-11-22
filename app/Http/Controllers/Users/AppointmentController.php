@@ -30,11 +30,10 @@ class AppointmentController extends Controller
 
     public function listOfAppointment()
     {
-        $repair = repair::all();
-        $clothe = clothe::all();
-        $fabric = fabric::all();
-
-        return view('dashboards.users.listofappointment', compact('repair', 'clothe', 'fabric'));
+        $UsersAuth = auth()->user()->id;
+        $appointments = appointment::where('user_id', $UsersAuth)
+            ->get();
+        return view('dashboards.users.listofappointment', compact('appointments'));
     }
 
     public function getPrice($id)

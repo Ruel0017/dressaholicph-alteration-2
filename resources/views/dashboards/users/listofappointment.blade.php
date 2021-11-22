@@ -19,13 +19,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    @foreach ($appointments as $appointment)
+                        <tr>
+                            <td>{{ $appointment->isActive ? 'Approved' : 'Pending' }}</td>
+                            <td>{{ $appointment->clothes->clothesName }}</td>
+                            <td>{{ $appointment->repair->repairName }}</td>
+                            <td>{{ $appointment->appointment_date }}</td>
+                            <td>{{ $appointment->totalAmount }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 

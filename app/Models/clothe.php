@@ -19,13 +19,8 @@ class clothe extends Model
     ];
 
 
-    public function repair()
+    public function appointment()
     {
-        return $this->hasMany(repair::class, 'id', 'id');
-    }
-
-    public function fabric()
-    {
-        return $this->hasMany(fabric::class, 'id', 'id');
+        return $this->hasMany(appointment::class, 'clothes_id', 'id');
     }
 }

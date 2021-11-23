@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminAppController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Users\AppointmentController;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
     Route::get('profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
 
+
     Route::post('update-profile-info', [AdminController::class, 'updateInfo'])->name('adminUpdateInfo');
+
+    Route::get('forapproval', [AdminAppController::class, 'index'])->name('admin.forapproval');
+    Route::get('appointmentlist', [AdminAppController::class, 'appointmentlist'])->name('admin.appointmentlist');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackHistory']], function () {
@@ -46,7 +51,10 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::get('settings', [UserController::class, 'settings'])->name('user.settings');
     Route::get('appointment', [AppointmentController::class, 'index'])->name('user.appointment');
     Route::post('appointment', [AppointmentController::class, 'store'])->name('user.CreateAppointment');
-    Route::get('appointment-list', [AppointmentController::class, 'listOfAppointment'])->name('user.listofappointment');
+    Route::get('appointment-list', [AppointmentController::class, 'appointmentlist'])->name('user.listofappointment');
+    
+   
+
 
     //AJAX
     Route::GET('getPrice/{id}', [AppointmentController::class, 'getPrice']);

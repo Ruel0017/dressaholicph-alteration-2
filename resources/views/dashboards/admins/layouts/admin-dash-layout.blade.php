@@ -96,6 +96,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Appointment
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                <a href="{{ route('admin.forapproval') }}"
+                                        class="nav-link {{ request()->is('admin/forapproval*') ? 'active' : '' }}">
+                                        <i class="fa fa-thumbs-up nav-icon"></i>
+                                        <p class="small">For Approval</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                <a href="{{ route('admin.appointmentlist') }}"
+                                        class="nav-link {{ request()->is('admin/appointmentlist *') ? 'active' : '' }}">
+                                        <i class="fa fa-list nav-icon"></i>
+                                        <p class="small">List of Appointment</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('admin.settings') }}"
                                 class="nav-link {{ request()->is('admin/settings*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-cog"></i>

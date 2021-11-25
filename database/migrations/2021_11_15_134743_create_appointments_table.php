@@ -16,10 +16,10 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->boolean('isActive')->default(0);
+            $table->boolean('status')->default(2);
             $table->integer('clothes_id');
-            $table->integer('repair_id');
-            $table->integer('fabric_id');
+            $table->integer('repair_id')->nullable();;
+            $table->integer('fabric_id')->nullable();;
             $table->string('appointment_date');
             $table->decimal('totalAmount');
             $table->string('approvedBy')->nullable();

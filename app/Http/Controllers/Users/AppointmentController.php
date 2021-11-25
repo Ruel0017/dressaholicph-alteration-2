@@ -33,6 +33,7 @@ class AppointmentController extends Controller
         $UsersAuth = auth()->user()->id;
         $appointments = appointment::where('user_id', $UsersAuth)
             ->get();
+
         return view('dashboards.users.listofappointment', compact('appointments'));
     }
 
@@ -87,8 +88,6 @@ class AppointmentController extends Controller
         $this->validate($request, [
             'appointment_date' => 'required',
             'clothes' => 'required',
-            'repair' => 'required',
-            'fabric' => 'required',
             'amount' => 'required',
         ]);
 

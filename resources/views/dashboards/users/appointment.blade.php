@@ -7,8 +7,26 @@
         <div class="card-header">
             <h3 class="card-title">Appointment</h3>
         </div>
-        <!-- /.card-header -->
-        <!-- form start -->
+
+        <div class="callout callout-danger">
+            <h5> Disclaimer : </h5>
+            <p>need mo muna mag bayad ng 50% once na na approve ni admin
+                ang schedule.</p>
+        </div>
+
+
+        <p class="mt-3 mb-1 col-md-12 ">Pili ka lods kung ano gussto mo</p>
+        {{-- <div class="btn-group btn-group-toggle col-md-12" data-toggle="buttons">
+            <label class="btn bg-olive active">
+                <input type="radio" name="options" id="option_b1" autocomplete="off" onclick="hideFabric()" checked>
+                Repair
+            </label>
+            <label class="btn bg-olive">
+                <input type="radio" name="options" id="option_b2" autocomplete="off" onclick="hideRepair()"> Custom Made
+            </label>
+        </div> --}}
+
+
         <form method="POST" action="{{ route('user.CreateAppointment') }}">
             @if (Session::get('success'))
                 <div class="alert alert-success">
@@ -75,7 +93,7 @@
 
                             <div class="form-group">
                                 <label for="repair">Types of Fabric</label>
-                                <select class="form-control" name="fabric">
+                                <select class="form-control" name="fabric" disabled>
                                     <option selected value="">Please Select Types of Fabric</option>
                                     @foreach ($fabric as $fabrics)
                                         <option value="{{ $fabrics->id }}">{{ $fabrics->fabricName }}</option>
@@ -183,5 +201,32 @@
                                 }
                             });
                         });
+
+                        function hideFabric() {
+                            var x = document.getElementById("fabric");
+                            var y = document.getElementById('repair')
+
+                            if (x.style.display === "none") {
+                                x.style.display = "block";
+                                y.style.display = "none"
+                            } else {
+                                x.style.display = "none";
+                                y.style.display = "block"
+                            }
+                        }
+
+                        function hideRepair() {
+                            var x = document.getElementById("repair");
+                            var y = document.getElementById('fabric')
+
+                            if (x.style.display === "none") {
+                                x.style.display = "block";
+                                y.style.display = "none"
+                            } else {
+                                x.style.display = "none";
+                                y.style.display = "block"
+                            }
+
+                        }
                     </script>
                 @endsection

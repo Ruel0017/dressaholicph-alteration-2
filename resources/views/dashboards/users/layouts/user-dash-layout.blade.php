@@ -199,7 +199,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
     <script>
         $(function() {
             $("#example1").DataTable({

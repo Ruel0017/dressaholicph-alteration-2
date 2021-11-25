@@ -69,98 +69,90 @@
                                             <span class="text-danger">@error('sex'){{ $message }}@enderror</span>
 
                                             </div>
-
                                             <div class="form-group">
-                                                <label for="dob">Date of Birth</label>
-                                                <input id="dob" type="date" class="form-control" name="dob" required autofocus>
-                                                <span class="text-danger">@error('dob'){{ $message }}@enderror</span>
+                                                <label for="address">Address</label>
+                                                <input id="address" type="text" class="form-control" name="address" required
+                                                    autofocus placeholder="Address">
+                                                <span class="text-danger">@error('address'){{ $message }}@enderror</span>
 
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="address">Address</label>
-                                                    <input id="address" type="text" class="form-control" name="address" required
-                                                        autofocus placeholder="Address">
-                                                    <span class="text-danger">@error('address'){{ $message }}@enderror</span>
+                                                    <label for="mobilenumber">Mobile Number</label>
+                                                    <input id="mobilenumber" type="text" minlength="11" maxlength="11"
+                                                        class="form-control" name="mobilenumber" required autofocus
+                                                        placeholder="Mobile Number">
+                                                    <span
+                                                        class="text-danger">@error('mobilenumber'){{ $message }}@enderror</span>
 
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="mobilenumber">Mobile Number</label>
-                                                        <input id="mobilenumber" type="text" minlength="11" maxlength="11"
-                                                            class="form-control" name="mobilenumber" required autofocus
-                                                            placeholder="Mobile Number">
-                                                        <span
-                                                            class="text-danger">@error('mobilenumber'){{ $message }}@enderror</span>
+                                                        <label for="email">E-Mail Address</label>
+                                                        <input id="email" type="email" class="form-control" name="email" required
+                                                            placeholder="Email Address">
+                                                        <span class="text-danger">@error('email'){{ $message }}@enderror</span>
 
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="email">E-Mail Address</label>
-                                                            <input id="email" type="email" class="form-control" name="email" required
-                                                                placeholder="Email Address">
-                                                            <span class="text-danger">@error('email'){{ $message }}@enderror</span>
+                                                            <label for="password">Password</label>
+                                                            <input id="password" type="password" class="form-control" name="password" required
+                                                                data-eye placeholder="Enter Password">
+                                                            <span class="text-danger">@error('password'){{ $message }}@enderror</span>
 
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="password">Password</label>
-                                                                <input id="password" type="password" class="form-control" name="password" required
-                                                                    data-eye placeholder="Enter Password">
-                                                                <span class="text-danger">@error('password'){{ $message }}@enderror</span>
+                                                                <label for="password-confirm">Confirm Password</label>
+                                                                <input id="password-confirm" type="password" class="form-control"
+                                                                    name="password_confirmation" required data-eye>
+                                                            </div>
 
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label for="password-confirm">Confirm Password</label>
-                                                                    <input id="password-confirm" type="password" class="form-control"
-                                                                        name="password_confirmation" required data-eye>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <div class="custom-checkbox custom-control">
-                                                                        <input type="checkbox" name="agree" id="agree" class="custom-control-input"
-                                                                            required="">
-                                                                        <label for="agree" class="custom-control-label">I agree to the <a href="#">Terms
-                                                                                and Conditions</a></label>
-                                                                        <div class="invalid-feedback">
-                                                                            You must agree with our Terms and Conditions
-                                                                        </div>
+                                                            <div class="form-group">
+                                                                <div class="custom-checkbox custom-control">
+                                                                    <input type="checkbox" name="agree" id="agree" class="custom-control-input"
+                                                                        required="">
+                                                                    <label for="agree" class="custom-control-label">I agree to the <a href="#">Terms
+                                                                            and Conditions</a></label>
+                                                                    <div class="invalid-feedback">
+                                                                        You must agree with our Terms and Conditions
                                                                     </div>
                                                                 </div>
+                                                            </div>
 
-                                                                <div class="form-group m-0">
-                                                                    <button type="submit" class="btn btn-primary btn-block">
-                                                                        Register
-                                                                    </button>
-                                                                </div>
-                                                                <div class="mt-4 text-center">
-                                                                    Already have an account? <a href="{{ route('login') }}">Login</a>
-                                                                </div>
-                                                            </form>
-                                                        </div>
+                                                            <div class="form-group m-0">
+                                                                <button type="submit" class="btn btn-primary btn-block">
+                                                                    Register
+                                                                </button>
+                                                            </div>
+                                                            <div class="mt-4 text-center">
+                                                                Already have an account? <a href="{{ route('login') }}">Login</a>
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                    <div class="footer">
-                                                        Copyright &copy; 2021 &mdash; Dressaholicph Alteration
-                                                    </div>
+                                                </div>
+                                                <div class="footer">
+                                                    Copyright &copy; 2021 &mdash; Dressaholicph Alteration
                                                 </div>
                                             </div>
                                         </div>
-                                    </section>
-                                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-                                                                        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-                                                                        crossorigin="anonymous">
-                                    </script>
-                                    <script src="js/my-login.js"></script>
-                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                                    <script type="text/javascript">
-                                        $('input[name="mobilenumber"]').keyup(function(e) {
-                                            if (/\D/g.test(this.value)) {
-                                                // Filter non-digits from input value.
-                                                this.value = this.value.replace(/\D/g, '');
-                                            }
-                                        });
-                                    </script>
-                                </body>
+                                    </div>
+                                </section>
+                                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                                                                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                                                                crossorigin="anonymous">
+                                </script>
+                                <script src="js/my-login.js"></script>
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                                <script type="text/javascript">
+                                    $('input[name="mobilenumber"]').keyup(function(e) {
+                                        if (/\D/g.test(this.value)) {
+                                            // Filter non-digits from input value.
+                                            this.value = this.value.replace(/\D/g, '');
+                                        }
+                                    });
+                                </script>
+                            </body>
 
-                                </html>
+                            </html>

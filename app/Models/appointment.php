@@ -15,7 +15,7 @@ class appointment extends Model
 
     protected $fillable = [
         'user_id',
-        'isActive',
+        'status_id',
         'clothes_id',
         'repair_id',
         'fabric_id',
@@ -37,5 +37,10 @@ class appointment extends Model
     public function fabric()
     {
         return $this->belongsTo(fabric::class, 'id', 'fabric_id');
+    }
+
+    public function statusName()
+    {
+        return $this->belongsTo(status::class, 'status', 'id');
     }
 }

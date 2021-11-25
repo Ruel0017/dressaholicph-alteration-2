@@ -56,7 +56,6 @@ class RegisterController extends Controller
             'mname' => ['max:255'],
             'lname' => ['required', 'string', 'max:255'],
             'sex' => ['required', 'string', 'max:255'],
-            'dob' => ['required'],
             'address' => ['required', 'string', 'max:255'],
             'mobilenumber' => ['required', 'string', 'min:11', 'max:11'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -93,7 +92,6 @@ class RegisterController extends Controller
             'mname' => ['max:255'],
             'lname' => ['required', 'string', 'max:255'],
             'sex' => ['required', 'string', 'max:255'],
-            'dob' => ['required', 'date'],
             'address' => ['required', 'string', 'max:255'],
             'mobilenumber' => ['required', 'string', 'min:11', 'max:11'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -106,11 +104,10 @@ class RegisterController extends Controller
         $user->mname = $request->mname;
         $user->lname = $request->lname;
         $user->sex = $request->sex;
-        $user->dob = $request->dob;
         $user->address = $request->address;
         $user->mobilenumber = $request->mobilenumber;
         $user->email = $request->email;
-        $user->password = \Hash::make($request->password);
+        $user->password = Hash::make($request->password);
 
         if ($user->save()) {
             return redirect()->back()->with('success', 'You are now successfully registered');

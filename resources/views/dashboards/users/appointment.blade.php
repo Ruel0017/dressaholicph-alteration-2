@@ -16,7 +16,7 @@
 
 
         <p class="mt-3 mb-1 col-md-12 ">Pili ka lods kung ano gussto mo</p>
-        {{-- <div class="btn-group btn-group-toggle col-md-12" data-toggle="buttons">
+        <div class="btn-group btn-group-toggle col-md-12" data-toggle="buttons">
             <label class="btn bg-olive active">
                 <input type="radio" name="options" id="option_b1" autocomplete="off" onclick="hideFabric()" checked>
                 Repair
@@ -24,7 +24,7 @@
             <label class="btn bg-olive">
                 <input type="radio" name="options" id="option_b2" autocomplete="off" onclick="hideRepair()"> Custom Made
             </label>
-        </div> --}}
+        </div>
 
 
         <form method="POST" action="{{ route('user.CreateAppointment') }}">
@@ -81,9 +81,9 @@
 
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" id='repair'>
                             <label for="repair">Types of Repair</label>
-                            <select class="form-control" name="repair" id="repair" disabled>
+                            <select class="form-control" name="repair" disabled>
                                 <option selected value="">Please Select Types of Repair</option>
                             </select>
 
@@ -91,8 +91,8 @@
 
                             </div>
 
-                            <div class="form-group">
-                                <label for="repair">Types of Fabric</label>
+                            <div class="form-group" id='fabric'>
+                                <label for="repair" id='fab'>Types of Fabric</label>
                                 <select class="form-control" name="fabric" disabled>
                                     <option selected value="">Please Select Types of Fabric</option>
                                     @foreach ($fabric as $fabrics)

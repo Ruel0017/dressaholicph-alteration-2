@@ -19,13 +19,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    @foreach($appointment as $appointments)
+                    <tr> 
+                        <td>{{$appointments->users->fname . ' ' . $appointments->users->lname}}</td>
+                        <td>{{$appointments->clothes->clothesName}}</td>
+                        <td>{{$appointments->repair->repairName}}</td>
+                        <td>{{$appointments->appointment_date}}</td>
+                        <td>{{$appointments->totalAmount}}</td>  
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
 

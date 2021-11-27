@@ -38,4 +38,9 @@ class appointment extends Model
     {
         return $this->belongsTo(fabric::class, 'id', 'fabric_id');
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

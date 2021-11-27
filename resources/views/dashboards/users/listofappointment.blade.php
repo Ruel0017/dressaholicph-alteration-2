@@ -27,7 +27,7 @@
                             <td>{{ $appointment->repair->repairName }}</td>
                             <td>{{ $appointment->appointment_date }}</td>
                             <td>{{ $appointment->totalAmount }}</td>
-                            @if ($appointment->status_id == 3)
+                            @if ($appointment->status == 3)
                                 <td><button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal"
                                         data-target="#modal-lg">Pay Now!</button></td>
                             @else

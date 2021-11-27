@@ -18,15 +18,26 @@ class AdminAppController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-public function index(Request $request)
+    public function index(Request $request)
     { 
 
-        return view('dashboards.admins.forapproval');
+        $appointment = appointment::WHERE('isActive',0)
+        ->get();
+
+        // dd($appointment);
+
+        return view('dashboards.admins.forapproval',compact('appointment'));
     }
+
+
 
     public function appointmentlist(Request $request)
     { 
+        $appointment = appointment::All()
+        ->get();
 
-        return view('dashboards.admins.appointmentlist');
+        // dd($appointment);
+
+        return view('dashboards.admins.appointmentlist',compact('appointment'));
     }
 }

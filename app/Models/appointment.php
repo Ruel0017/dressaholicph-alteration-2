@@ -43,4 +43,8 @@ class appointment extends Model
     {
         return $this->belongsTo(status::class, 'status', 'id');
     }
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

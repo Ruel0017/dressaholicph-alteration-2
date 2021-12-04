@@ -50,6 +50,21 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    // public function __construct()
+    // {
+    //     $this->middleware(function($request,$next){
+    //         if (session('success')) {
+    //             Alert::success(session('success'));
+    //         }
+
+    //         if (session('error')) {
+    //             Alert::error(session('error'));
+    //         }
+
+    //         return $next($request);
+    //     });
+    // }
+
     public function login(Request $request)
     {
         $input = $request->all();
@@ -68,6 +83,11 @@ class LoginController extends Controller
             } else {
                 return redirect()->route('login')->with('error', 'Email or Password are wrong');
             }
+        }
+        else
+        {
+            return redirect()->back()
+            ->with('error', 'Error during the creation!');
         }
     }
 }

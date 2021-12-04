@@ -145,6 +145,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                             </ul>
+                            <li class="nav-item">
+                            <a href="{{ route('user.settings') }}"
+                                class="nav-link {{ request()->is('user/settings*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-shopping-cart"></i>
+                                <p>
+                                    Buy our Products!
+                                </p>
+                            </a>
+                        </li>
                         </li>
                     </ul>
                 </nav>

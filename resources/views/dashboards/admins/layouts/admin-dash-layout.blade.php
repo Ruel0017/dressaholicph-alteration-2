@@ -105,15 +105,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                <a href="{{ route('admin.forapproval') }}"
+                                    <a href="{{ route('admin.assign') }}"
+                                        class="nav-link {{ request()->is('admin/assign*') ? 'active' : '' }}">
+                                        <i class="fa fa-plus nav-icon"></i>
+                                        <p class="small">Assign</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.forapproval') }}"
                                         class="nav-link {{ request()->is('admin/forapproval*') ? 'active' : '' }}">
                                         <i class="fa fa-thumbs-up nav-icon"></i>
                                         <p class="small">For Approval</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                <a href="{{ route('admin.appointmentlist') }}"
-                                        class="nav-link {{ request()->is('admin/appointmentlist *') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.appointmentlist') }}"
+                                        class="nav-link {{ request()->is('admin/appointmentlist*') ? 'active' : '' }}">
                                         <i class="fa fa-list nav-icon"></i>
                                         <p class="small">List of Appointment</p>
                                     </a>
@@ -208,6 +215,70 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         }
                     }
                 });
+            });
+        });
+    </script>
+
+    <script>
+        // select edit user
+        $(document).on('click', '.statusEdit', function() {
+            var _this = $(this).parents('tr');
+            let getMobile = _this.find('.email').text()
+            let approvedBy = _this.find('.fullname').text()
+            $('#idUpdate').val(_this.find('.idUpdate').text());
+            $('#e_ids').val(_this.find('.ids').text());
+            $('#e_status').val(_this.find('.status').text());
+            $('#e_fname').val(approvedBy.trim());
+            $('#e_email').val(getMobile.trim().replace('0', '63'));
+
+            console.log(getMobile.trim().replace('0', '63'))
+
+            $('#editStatus').attr('action', '{{ route('admin.statusUpdate') }}');
+        });
+    </script>
+
+    <script>
+        // select edit user
+        $(document).on('click', '.assignUpdate', function() {
+            var _this = $(this).parents('tr');
+            $('#idUpdate').val(_this.find('.idUpdate').text());
+            $('#e_ids').val(_this.find('.ids').text());
+
+            $('#e_status').val(_this.find('.status').text());
+            $('#e_fname').val(_this.find('.fullname').text());
+
+            $('#assignUpdate').attr('action', '{{ route('admin.statusUpdate') }}');
+        });
+    </script>
+
+    <!-- DataTables  & Plugins -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="plugins/jszip/jszip.min.js"></script>
+    <script src="plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
             });
         });
     </script>

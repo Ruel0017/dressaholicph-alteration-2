@@ -8,6 +8,7 @@ use App\Models\clothe;
 use App\Models\fabric;
 use App\Models\repair;
 use App\Models\repair_price;
+use App\Models\payment;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -25,6 +26,9 @@ class AppointmentController extends Controller
         $clothe = clothe::all();
         $fabric = fabric::all();
 
+        $input = $request->input('clothesID');
+        
+
         return view('dashboards.users.appointment', compact('repair', 'clothe', 'fabric'));
     }
 
@@ -32,7 +36,7 @@ class AppointmentController extends Controller
     {
         $UsersAuth = auth()->user()->id;
         $appointments = appointment::where('user_id', $UsersAuth)
-            ->get();
+            ->get();  
 
         return view('dashboards.users.listofappointment', compact('appointments'));
     }
@@ -49,17 +53,21 @@ class AppointmentController extends Controller
         return response()->json($repair);
     }
 
-    public function getAmount($id)
+    public function getAmount($ids)
     {
+        
+        // $getClothesID = new getPrice();
+        $str_arr = explode (",", $ids); 
 
-        $repairAmount = repair_price::where('repair_id', $id)
+        $repairAmount = repair_price::where('repair_id', $str_arr[0])
+            ->where('clothes_id',$str_arr[1])
             ->leftJoin('repairs', '.repair_id', '=', 'repairs.id')
-            ->select('amount')
-            ->distinct()
+            ->select('amount', 'clothes_id')
             ->get();
 
+            // dd($repairAmount);
 
-        return response()->json($repairAmount);
+         return response()->json($repairAmount);
     }
 
     /**
@@ -101,10 +109,37 @@ class AppointmentController extends Controller
 
         if ($CountAppointment <= 3) {
             $appointment->save();
-            return redirect()->back()->with('success', 'Please wait for your approval');
+            return redirect()->back()->with('success', 'Appointment submitted! Please wait for your approval');
         } else {
-            return redirect()->back()->with('error', 'Please select other time/date this is fully booked');
+            return redirect()->back()->with('error', 'Selected date and time is not available');
         }
+    }
+
+    public function InsertPartialPayment(Request $request)
+    {
+        $this->validate($request, [
+            'accountname' => 'required',
+            'accountnumber' => 'required',
+            'amount' => 'required',
+        ]);
+
+        $payment = new payment;
+
+        
+     
+        // $payment->appointment_id = $request->input('app_ID');
+        $payment->appointment_id = "1";
+        $payment->amount = $request->input('amount');
+        $payment->type_of_payment="PARTIAL PAYMENT";
+        $payment->accountname = $request->input('accountname');
+        // dd($payment);
+        $payment->accountnumber=$request->input('accountnumber');
+        
+       
+
+        $payment->save();
+        return redirect()->back()->with('success', 'Payment success! Thank you.');
+        
     }
 
     /**

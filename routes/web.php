@@ -63,10 +63,12 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::get('appointment', [AppointmentController::class, 'index'])->name('user.appointment');
     Route::post('appointment', [AppointmentController::class, 'store'])->name('user.CreateAppointment');
     Route::get('appointment-list', [AppointmentController::class, 'listOfAppointment'])->name('user.listofappointment');
+    Route::post('insertpartialpayment', [AppointmentController::class, 'InsertPartialPayment'])->name('user.insertpartialpayment');
 
     //AJAX
     Route::GET('getPrice/{id}', [AppointmentController::class, 'getPrice']);
     Route::GET('getAmount/{id}', [AppointmentController::class, 'getAmount']);
+    Route::POST('getAmount', [AppointmentController::class, 'getAmount'])->name('getAmount');
 });
 
 

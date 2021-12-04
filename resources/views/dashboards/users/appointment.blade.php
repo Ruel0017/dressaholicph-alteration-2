@@ -10,12 +10,11 @@
 
         <div class="callout callout-danger">
             <h5> Disclaimer : </h5>
-            <p>need mo muna mag bayad ng 50% once na na approve ni admin
-                ang schedule.</p>
+            <p>The amount shown is the 50% of your Total amount, hence you have to pay the another 50% to the shop.</p>
         </div>
 
-
-        <p class="mt-3 mb-1 col-md-12 ">Pili ka lods kung ano gussto mo</p>
+<!-- 
+        <p class="mt-3 mb-1 col-md-12 ">Choose your type to repair</p>
         <div class="btn-group btn-group-toggle col-md-12" data-toggle="buttons">
             <label class="btn bg-olive active">
                 <input type="radio" name="options" id="option_b1" autocomplete="off" onclick="hideFabric()" checked>
@@ -24,7 +23,7 @@
             <label class="btn bg-olive">
                 <input type="radio" name="options" id="option_b2" autocomplete="off" onclick="hideRepair()"> Custom Made
             </label>
-        </div>
+        </div> -->
 
 
         <form method="POST" action="{{ route('user.CreateAppointment') }}">
@@ -44,7 +43,7 @@
                     <div class="row">
                         <div class="col-6">
                             <label for="date">Date</label>
-                            <input class="date form-control text-right" type="text" id='date'>
+                            <input class="date form-control text-right" type="text" id='date' readonly>
                             <span class="fa fa-calendar calendarspan"></span>
                         </div>
 
@@ -81,9 +80,9 @@
 
                         </div>
 
-                        <div class="form-group" id='repair'>
+                        <div class="form-group">
                             <label for="repair">Types of Repair</label>
-                            <select class="form-control" name="repair" disabled>
+                            <select class="form-control" name="repair" id='repair'disabled>
                                 <option selected value="">Please Select Types of Repair</option>
                             </select>
 
@@ -91,9 +90,9 @@
 
                             </div>
 
-                            <div class="form-group" id='fabric'>
+                            <div class="form-group">
                                 <label for="repair" id='fab'>Types of Fabric</label>
-                                <select class="form-control" name="fabric" disabled>
+                                <select class="form-control" name="fabric" >
                                     <option selected value="">Please Select Types of Fabric</option>
                                     @foreach ($fabric as $fabrics)
                                         <option value="{{ $fabrics->id }}">{{ $fabrics->fabricName }}</option>
@@ -116,6 +115,7 @@
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
+                         
                         </form>
                     </div>
 
@@ -141,6 +141,7 @@
                         $(document).ready(function() {
                             $('#clothes').on('change', function() {
                                 var clothesID = $(this).val();
+                                // $('#clothesIDs').val("clothesID");
                                 if (clothesID) {
                                     $.ajax({
                                         url: 'user/getPrice/' + clothesID,
@@ -148,10 +149,10 @@
                                         dataType: "json",
                                         success: function(data) {
                                             if (data) {
-                                                console.log(data);
+                                                // console.log(data);
                                                 $('#repair').empty();
                                                 $('#repair').append('<option hidden>Types of Repair</option>');
-                                                $('#repair').disabe
+                                                $('#repair').disabled
                                                 $.each(data, function(key, repairPriceDB) {
                                                     $('select[name="repair"]').prop('disabled', false)
                                                         .append(
@@ -175,20 +176,23 @@
                             var a = [];
                             $('#repair').on('change', function() {
                                 var repairID = $(this).val();
+                                var clothesID = $('#clothes').val();
+                                console.log(clothesID)
+                                console.log(repairID)
                                 if (repairID) {
                                     $.ajax({
-                                        url: 'user/getAmount/' + repairID,
+                                        url: 'user/getAmount/' + repairID +','+ clothesID,
                                         type: "GET",
                                         dataType: "json",
+                                        // data:{clothesID,},
                                         success: function(data) {
                                             if (data) {
                                                 $('#amount').empty();
-                                                $.each(data, function(repairAmount) {
+                                                $.each(data, function(repairAmount) {                                                    
                                                     for (i in data) {
                                                         a.push(data[i].amount);
                                                     }
-                                                    // console.log(a[0]);
-                                                    $('input[name=amount]').val(a[0]);
+                                                    $('input[name=amount]').val(a[0]/2);
                                                 });
                                             } else {
                                                 console.log('error to tanga')
@@ -200,33 +204,33 @@
                                     $('#repair').empty();
                                 }
                             });
-                        });
+                        }); 
 
-                        function hideFabric() {
-                            var x = document.getElementById("fabric");
-                            var y = document.getElementById('repair')
+                        // function hideFabric() {
+                        //     var x = document.getElementById("fabric");
+                        //     var y = document.getElementById('repair')
 
-                            if (x.style.display === "none") {
-                                x.style.display = "block";
-                                y.style.display = "none"
-                            } else {
-                                x.style.display = "none";
-                                y.style.display = "block"
-                            }
-                        }
+                        //     if (x.style.display === "none") {
+                        //         x.style.display = "block";
+                        //         y.style.display = "none"
+                        //     } else {
+                        //         x.style.display = "none";
+                        //         y.style.display = "block"
+                        //     }
+                        // }
 
-                        function hideRepair() {
-                            var x = document.getElementById("repair");
-                            var y = document.getElementById('fabric')
+                        // function hideRepair() {
+                        //     var x = document.getElementById("repair");
+                        //     var y = document.getElementById('fabric')
 
-                            if (x.style.display === "none") {
-                                x.style.display = "block";
-                                y.style.display = "none"
-                            } else {
-                                x.style.display = "none";
-                                y.style.display = "block"
-                            }
+                        //     if (x.style.display === "none") {
+                        //         x.style.display = "block";
+                        //         y.style.display = "none"
+                        //     } else {
+                        //         x.style.display = "none";
+                        //         y.style.display = "block"
+                        //     }
 
-                        }
+                        //  }
                     </script>
                 @endsection

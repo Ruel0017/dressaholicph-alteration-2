@@ -53,10 +53,6 @@ class repairSeed extends Seeder
                 'repairName' => 'Zipper',
                 'created_at' => Carbon::now(),
             ],
-            [
-                'repairName' => 'Custom Made',
-                'created_at' => Carbon::now(),
-            ],
         ];
 
         DB::table('repairs')->insert($repair);

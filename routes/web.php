@@ -4,9 +4,15 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AdminAppController;
+use App\Http\Controllers\Admin\AdminAssignController;
+use App\Http\Controllers\EmailsController;
+use App\Http\Controllers\SmsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Users\AppointmentController;
+use App\Mail\MailApproval;
+use App\Models\appointment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +47,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
 
     Route::get('forapproval', [AdminAppController::class, 'index'])->name('admin.forapproval');
     Route::get('appointmentlist', [AdminAppController::class, 'appointmentlist'])->name('admin.appointmentlist');
+
+    Route::get('assign', [AdminAssignController::class, 'index'])->name('admin.assign');
+
+    //Update
+
+    Route::get('statusUpdate', [AdminAppController::class, 'update'])->name('admin.statusUpdate');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackHistory']], function () {
@@ -56,3 +68,15 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::GET('getPrice/{id}', [AppointmentController::class, 'getPrice']);
     Route::GET('getAmount/{id}', [AppointmentController::class, 'getAmount']);
 });
+
+
+//route for mailing 
+
+// Route::get('/email', function () {
+//     Mail::to('ruel.reyes1998@gmail.com')->send(new MailApproval);
+//     return new MailApproval();
+// });
+
+Route::get('/email', [EmailsController::class, 'email']);
+
+route::get('/sms', [SmsController::class, 'index']);

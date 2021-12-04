@@ -8,9 +8,10 @@
             <h3 class="card-title">List of Appointment</h3>
         </div>
         <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="listOfappointment" class="table table-bordered table-striped">
                 <thead>
                     <tr>
+                        <th scope="col">ID</th>
                         <th scope="col">Status</th>
                         <th scope="col">Clothes</th>
                         <th scope="col">Repair</th>
@@ -22,6 +23,7 @@
                 <tbody>
                     @foreach ($appointments as $appointment)
                         <tr>
+                            <th>{{ $appointment->id }}</th>
                             <td>{{ $appointment->statusName->status }}</td>
                             <td>{{ $appointment->clothes->clothesName }}</td>
                             <td>{{ $appointment->repair->repairName }}</td>
@@ -44,7 +46,7 @@
     </div>
 
     {{-- MODAL SECTION --}}
-    <div class="modal fade" id="modal-lg">
+    <div class="modal fade" id="editModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -96,7 +98,6 @@
             </div>
         </div>
     </div>
-
     {{-- END MODAL SECTION --}}
 
 @endsection

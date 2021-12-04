@@ -1,5 +1,6 @@
 @extends('dashboards.admins.layouts.admin-dash-layout')
-@section('title', 'Appointment Approval')
+@section('title', 'Assign')
+
 @section('content')
 
     <div class="card">
@@ -7,10 +8,9 @@
             <h3 class="card-title">List of Appointment</h3>
         </div>
         <div class="card-body">
-            <table class="table table-bordered table-striped">
+            <table id="AppForApproval" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th hidden scope=" col">ID</th>
                         <th scope="col">Status</th>
                         <th scope="col">Name</th>
                         <th scope="col">Clothes</th>
@@ -22,30 +22,31 @@
                 </thead>
                 <tbody>
                     @foreach ($appointment as $appointments)
-                        <tr role="row" class="odd">
-                            <td hidden class="ids">{{ $appointments->id }}</td>
-                            <td class="status" hidden>{{ $appointments->status }}</td>
+                        <tr>
                             <td>{{ $appointments->statusName->status }}</td>
-                            <td class="fullname">
-                                {{ $appointments->users->fname . ' ' . $appointments->users->lname }}
-                            </td>
-                            <td class="clothesName">{{ $appointments->clothes->clothesName }}</td>
-                            <td class="repairName">{{ $appointments->repair->repairName }}</td>
-                            <td class="date">{{ $appointments->appointment_date }}</td>
-                            <td class="totalAmount">{{ $appointments->totalAmount }}</td>
-                            <td hidden class="approved">{{ Auth::user()->fname . ' ' . Auth::user()->lname }}
-                            <td hidden class="email">{{ $appointments->users->mobilenumber }}
-                            </td>
-                            <td class="text-center">
-                                <a class="btn btn-block btn-primary btn-sm statusEdit" data-toggle="modal"
-                                    data-idUpdate="''" data-target="#userUpdate">
-                                    Perform Action
-                                </a>
-                            </td>
+                            <td>{{ $appointments->users->fname . ' ' . $appointments->users->lname }}</td>
+                            <td>{{ $appointments->clothes->clothesName }}</td>
+                            <td>{{ $appointments->repair->repairName }}</td>
+                            <td>{{ $appointments->appointment_date }}</td>
+                            <td>{{ $appointments->totalAmount }}</td>
+                            @if ($appointments->status == 4)
+                                <td>
+                                    <a class="btn btn-block btn-primary btn-sm statusEdit" data-toggle="modal"
+                                        data-idUpdate="''" data-target="#userUpdate">
+                                        Perform Action
+                                    </a>
+                                </td>
+                            @else
+                                <td>
+                                    <button type="submit" class="btn btn-block btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#modal-lg"> Perform Action </button>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
 
@@ -55,12 +56,12 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header text-write">
-                    <h4 class="modal-title">Update Status</h4>
+                    <h4 class="modal-title">Update Student</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="ti-close"></i></span>
                     </button>
                 </div>
-                <form action="" method="GET" id="editStatus">
+                <form action="" method="GET" id="assignUpdate">
                     {{ csrf_field() }}
                     <input type="text" hidden class="col-sm-9 form-control" id="idUpdate" name="idUpdate" value="" />
                     <div class="modal-body">
@@ -68,7 +69,6 @@
                             <div class="col-sm-9">
                                 <input type="text" id="e_ids" name="ids" class="form-control" hidden />
                                 <input type="text" id="e_fname" name="name" class="form-control" hidden />
-                                <input type="text" id="e_email" name="email" class="form-control" hidden />
                             </div>
                         </div>
                         <div class="form-group row">

@@ -17,6 +17,7 @@ class repair_price extends Model
     protected $fillable = [
         'clothes_id',
         'repair_id',
+        'fabric_id',
         'amount',
     ];
 
@@ -28,5 +29,10 @@ class repair_price extends Model
     public function repair()
     {
         return $this->hasMany(repair::class, 'repair_id', 'id');
+    }
+
+    public function fabric()
+    {
+        return $this->hasMany(fabric::class, 'fabric_id', 'id');
     }
 }

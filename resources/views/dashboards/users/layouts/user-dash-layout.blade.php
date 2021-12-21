@@ -143,17 +143,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <i class="fa fa-list nav-icon"></i>
                                         <p class="small">List of my Appointment</p>
                                     </a>
-                                </li>
+                                </li> 
                             </ul>
-                        <li class="nav-item">
-                            <a href="{{ route('user.settings') }}"
-                                class="nav-link {{ request()->is('user/settings*') ? 'active' : '' }}">
+                            <li class="nav-item">
+                            <a href="{{ route('user.ecommerce') }}"
+                                class="nav-link {{ request()->is('user/ecommerce*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
-                                <p>
-                                    Buy our Products!
-                                </p>
+                                <p class="small"> Buy our Products! </p>
                             </a>
-                        </li>
                         </li>
                     </ul>
                 </nav>

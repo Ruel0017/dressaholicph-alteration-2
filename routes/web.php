@@ -9,6 +9,7 @@ use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Users\AppointmentController;
+use App\Http\Controllers\Users\EcommerceController;
 use App\Mail\MailApproval;
 use App\Models\appointment;
 use Illuminate\Support\Facades\Auth;
@@ -62,12 +63,16 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::get('settings', [UserController::class, 'settings'])->name('user.settings');
     Route::get('appointment', [AppointmentController::class, 'index'])->name('user.appointment');
     Route::post('appointment', [AppointmentController::class, 'store'])->name('user.CreateAppointment');
+    Route::post('CreateAppFabric', [AppointmentController::class, 'CreateAppFabric'])->name('user.CreateAppFabric');
     Route::get('appointment-list', [AppointmentController::class, 'listOfAppointment'])->name('user.listofappointment');
     Route::post('insertpartialpayment', [AppointmentController::class, 'InsertPartialPayment'])->name('user.insertpartialpayment');
+    Route::get('ecommerce', [EcommerceController::class, 'index']) -> name('user.ecommerce');
 
     //AJAX
+    Route::GET('getPrice_FABRIC/{id}', [AppointmentController::class, 'getPrice_FABRIC']);
     Route::GET('getPrice/{id}', [AppointmentController::class, 'getPrice']);
     Route::GET('getAmount/{id}', [AppointmentController::class, 'getAmount']);
+    Route::GET('getAmount_Fabric/{id}', [AppointmentController::class, 'getAmount_Fabric']);
     Route::POST('getAmount', [AppointmentController::class, 'getAmount'])->name('getAmount');
 });
 

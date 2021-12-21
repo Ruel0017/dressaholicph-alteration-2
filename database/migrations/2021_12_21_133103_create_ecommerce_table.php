@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRepairPricesTable extends Migration
+class CreateEcommerceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateRepairPricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('repair_prices', function (Blueprint $table) {
+        Schema::create('Ecommerce', function (Blueprint $table) {
             $table->id();
-            $table->integer('clothes_id');
-            $table->integer('repair_id');
-            $table->integer('fabric_id');
-            $table->decimal('amount');
+            $table->string('ProducName');
+            $table->integer('Quantity');
+            $table->string('ImageLink');
+            $table->decimal('ProductPrice');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateRepairPricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('repair_prices');
+        Schema::dropIfExists('Ecommerce');
     }
 }

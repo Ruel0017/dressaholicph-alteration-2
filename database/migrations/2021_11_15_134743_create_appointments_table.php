@@ -18,8 +18,9 @@ class CreateAppointmentsTable extends Migration
             $table->integer('user_id');
             $table->boolean('status')->default(2);
             $table->integer('clothes_id');
-            $table->integer('repair_id')->nullable();;
-            $table->integer('fabric_id')->nullable();;
+            $table->integer('emp_id')->nullable();
+            $table->integer('repair_id')->nullable();
+            $table->integer('fabric_id')->nullable();
             $table->string('appointment_date');
             $table->decimal('totalAmount');
             $table->string('approvedBy')->nullable();

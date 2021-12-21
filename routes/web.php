@@ -53,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
     //Update
 
     Route::get('statusUpdate', [AdminAppController::class, 'update'])->name('admin.statusUpdate');
+    Route::post('assignEmployee', [AdminAssignController::class, 'update'])->name('admin.assignUpdate');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackHistory']], function () {
@@ -70,15 +71,3 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::GET('getAmount/{id}', [AppointmentController::class, 'getAmount']);
     Route::POST('getAmount', [AppointmentController::class, 'getAmount'])->name('getAmount');
 });
-
-
-//route for mailing 
-
-// Route::get('/email', function () {
-//     Mail::to('ruel.reyes1998@gmail.com')->send(new MailApproval);
-//     return new MailApproval();
-// });
-
-Route::get('/email', [EmailsController::class, 'email']);
-
-route::get('/sms', [SmsController::class, 'index']);

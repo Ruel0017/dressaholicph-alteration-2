@@ -145,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                             </ul>
-                            <li class="nav-item">
+                        <li class="nav-item">
                             <a href="{{ route('user.settings') }}"
                                 class="nav-link {{ request()->is('user/settings*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
@@ -186,6 +186,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- ./wrapper -->
 
+
+    <script>
+        // Initial appointment
+        $(document).on('click', '.statusEdit', function() {
+            var _this = $(this).parents('tr');
+            $('#idUpdate').val(_this.find('.idUpdate').text());
+            $('#e_ids').val(_this.find('.ids').text());
+            $('#e_status').val(_this.find('.status').text());
+            $('#e_amount').val(_this.find('.amount').text());
+
+
+            $('#editStatus').attr('action', '{{ route('user.insertpartialpayment') }}');
+        });
+    </script>
+
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
@@ -194,6 +209,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
+
+
+
 
     <!-- DataTables  & Plugins -->
     <script src="plugins/datatables/jquery.dataTables.min.js"></script>
@@ -210,12 +228,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script>
         $(function() {
-            $("#example1").DataTable({
+            $("#listOfappointment").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#listOfappointment_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,

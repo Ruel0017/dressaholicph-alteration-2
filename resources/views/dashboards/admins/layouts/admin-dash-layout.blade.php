@@ -8,7 +8,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name='csrf-token' content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <base href="{{ \URL::to('/') }}" <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -17,6 +16,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+    {{-- Date picker --}}
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css"
+        rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -238,16 +255,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </script>
 
     <script>
-        // select edit user
-        $(document).on('click', '.assignUpdate', function() {
+        // for assign
+        $(document).on('click', '.assignEmp', function() {
             var _this = $(this).parents('tr');
+            let getMobile = _this.find('.number').text()
             $('#idUpdate').val(_this.find('.idUpdate').text());
             $('#e_ids').val(_this.find('.ids').text());
+            $('#e_number').val(getMobile.trim().replace('0', '63'));
 
-            $('#e_status').val(_this.find('.status').text());
-            $('#e_fname').val(_this.find('.fullname').text());
-
-            $('#assignUpdate').attr('action', '{{ route('admin.statusUpdate') }}');
+            console.log(getMobile.trim().replace('0', '63'))
+            $('#assignUpdate').attr('action', '{{ route('admin.assignUpdate') }}');
         });
     </script>
 
@@ -266,11 +283,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script>
         $(function() {
-            $("#example1").DataTable({
+            $("#example").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                "buttons": ["copy", "csv", "excel", "pdf", "print"]
+            }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,

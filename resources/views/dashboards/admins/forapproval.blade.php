@@ -7,7 +7,7 @@
             <h3 class="card-title">List of Appointment</h3>
         </div>
         <div class="card-body">
-            <table class="table table-bordered table-striped">
+            <table id="example" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th hidden scope=" col">ID</th>
@@ -37,10 +37,9 @@
                             <td hidden class="email">{{ $appointments->users->mobilenumber }}
                             </td>
                             <td class="text-center">
-                                <a class="btn btn-block btn-primary btn-sm statusEdit" data-toggle="modal"
-                                    data-idUpdate="''" data-target="#userUpdate">
-                                    Perform Action
-                                </a>
+                                <button type="button" class="btn btn-block btn-primary btn-sm statusEdit"
+                                    data-toggle="modal" data-idUpdate="''" data-target="#userUpdate">Perform
+                                    Action</button>
                             </td>
                         </tr>
                     @endforeach

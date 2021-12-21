@@ -32,10 +32,6 @@ class AdminAppController extends Controller
     {
         $appointment = appointment::All();
 
-
-
-        // dd($appointment);
-
         return view('dashboards.admins.appointmentlist', compact('appointment'));
     }
 
@@ -46,30 +42,25 @@ class AdminAppController extends Controller
         $getMobileNumber = $request->input('email');
         $Status = $request->input('status');
 
-        $SMSApproved =  Nexmo::message()->send([
-            'to' =>  $getMobileNumber,
-            'from' => '639999999999',
-            'text' => 'This is notify you that your appointment is already approved, please settle the half of payment to your dashboard, Thank you ! '
-        ]);
-
-        $SMSdisApproved =  Nexmo::message()->send([
-            'to' =>  $getMobileNumber,
-            'from' => '639999999999',
-            'text' => 'This is notify you that your appointment is denied, Thank you! '
-        ]);
-
         $statusUpdate = appointment::find($getID);
         $statusUpdate->approvedBy = $request->input('name');
         $statusUpdate->status = $Status;
 
         if ($statusUpdate && $Status == '3') {
             $statusUpdate->save();
-            $SMSApproved;
-            // Mail::to($request->input('email'))->send(new MailApproval());
+            Nexmo::message()->send([
+                'to' =>  $getMobileNumber,
+                'from' => '639999999999',
+                'text' => 'This is to notify you that your appointment is already approved. Please settle the half of payment to your dashboard. Thank you !'
+            ]);
             return redirect()->back()->with('success', 'Status is successfuly update');
         } else {
             $statusUpdate->save();
-            $SMSdisApproved;
+            Nexmo::message()->send([
+                'to' =>  $getMobileNumber,
+                'from' => '639999999991',
+                'text' => 'This is to notify you that your appointment has been denied. Thank you!'
+            ]);
             return redirect()->back()->with('error', 'Disapporved');
         }
     }

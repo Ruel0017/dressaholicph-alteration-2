@@ -22,6 +22,7 @@ class appointment extends Model
         'appointment_date',
         'totalAmount',
         'approvedBy',
+        'emp_id'
     ];
 
     public function clothes()
@@ -46,5 +47,9 @@ class appointment extends Model
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    public function employees()
+    {
+        return $this->belongsTo(employee::class, 'id', 'emp_id');
     }
 }

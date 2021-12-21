@@ -8,6 +8,16 @@
             <h3 class="card-title">List of Appointment</h3>
         </div>
         <div class="card-body">
+            @if (Session::get('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+            @if (Session::get('error'))
+                <div class="alert alert-danger">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
             <table id="listOfappointment" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -23,17 +33,19 @@
                 <tbody>
                     @foreach ($appointments as $appointment)
                         <tr>
-                            <th>{{ $appointment->id }}</th>
+                            <th class="ids">{{ $appointment->id }}</th>
                             <td>{{ $appointment->statusName->status }}</td>
                             <td>{{ $appointment->clothes->clothesName }}</td>
                             <td>{{ $appointment->repair->repairName }}</td>
                             <td>{{ $appointment->appointment_date }}</td>
-                            <td>{{ $appointment->totalAmount }}</td>
+                            <td class="amount">{{ $appointment->totalAmount }}</td>
                             @if ($appointment->status == 3)
-                                <td><button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#modal-lg">Pay Now!</button></td>
+                                <td>
+                                    <button type="button" class="btn btn-block btn-primary btn-sm statusEdit"
+                                        data-toggle="modal" data-idUpdate="''" data-target="#userUpdate">Pay Now!</button>
+                                </td>
                             @else
-                                <td><button type="button" class="btn btn-block btn-primary btn-sm disabled" disabled>Pay
+                                <td><button type="button" class="btn btn-block btn-danger btn-sm disabled" disabled>Pay
                                         Now!</button>
                                 </td>
                             @endif
@@ -45,9 +57,10 @@
         </div>
     </div>
 
-    {{-- MODAL SECTION --}}
-    <div class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
+    <!-- Modal Update-->
+    <div class="modal fade" id="userUpdate" tabindex="-1" role="dialog" style="z-index: 1050; display: none;"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Payment</h4>
@@ -55,17 +68,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('user.insertpartialpayment') }}">
-                    @if (Session::get('success'))
-                        <div class="alert alert-success">
-                            {{ Session::get('success') }}
-                        </div>
-                    @endif
-                    @if (Session::get('error'))
-                        <div class="alert alert-danger">
-                            {{ Session::get('error') }}
-                        </div>
-                    @endif
+                <form method="POST" action="" id="editStatus">
                     @csrf
                     <div class="modal-body">
                         <div class="callout callout-danger">
@@ -75,6 +78,10 @@
 
                         <div class="form-group">
                             <div class="form-group">
+                                <input type="text" id="e_ids" name="ids" class="form-control" hidden />
+                                <input type="text" hidden class="col-sm-9 form-control" id="idUpdate" name="idUpdate"
+                                    value="" />
+
 
                                 <label for="listOfPayment">Channel of Payment</label>
 
@@ -111,16 +118,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="amount">Amount to pay</label>
-                                <input type="text" class="form-control" value="100" name="amount" readonly>
+                                <input type="text" class="form-control" id="e_amount" name="amount" readonly>
                                 <span class="text-danger">@error('amount'){{ $message }}@enderror</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="amount">Account Number</label>
+                                    <label for="accountnumber">Account Number</label>
                                     <input type="text" class="form-control" name="accountnumber" placeholder="" required>
                                     <span class="text-danger">@error('accountnumber'){{ $message }}@enderror</span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="amount">Account Name</label>
+                                        <label for="accountname">Account Name</label>
                                         <input type="text" class="form-control" name="accountname" placeholder="" required>
                                         <span class="text-danger">@error('accountname'){{ $message }}@enderror</span>
                                         </div>
@@ -135,6 +142,21 @@
                         </div>
                     </div>
                 </div>
+                {{-- End modal --}}
+
+                {{-- MODAL SECTION --}}
+
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script type="text/javascript">
+                    $('input[name="accountnumber"]').keyup(function(e) {
+                        if (/\D/g.test(this.value)) {
+                            // Filter non-digits from input value.
+                            this.value = this.value.replace(/\D/g, '');
+                        }
+                    });
+                </script>
+
 
                 <script type="text/javascript">
                     function swapImage() {

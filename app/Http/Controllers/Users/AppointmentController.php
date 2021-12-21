@@ -9,7 +9,9 @@ use App\Models\fabric;
 use App\Models\repair;
 use App\Models\repair_price;
 use App\Models\payment;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class AppointmentController extends Controller
 {
@@ -27,7 +29,7 @@ class AppointmentController extends Controller
         $fabric = fabric::all();
 
         $input = $request->input('clothesID');
-        
+
 
         return view('dashboards.users.appointment', compact('repair', 'clothe', 'fabric'));
     }
@@ -36,7 +38,7 @@ class AppointmentController extends Controller
     {
         $UsersAuth = auth()->user()->id;
         $appointments = appointment::where('user_id', $UsersAuth)
-            ->get();  
+            ->get();
 
         return view('dashboards.users.listofappointment', compact('appointments'));
     }
@@ -69,19 +71,19 @@ class AppointmentController extends Controller
 
     public function getAmount($ids)
     {
-        
+
         // $getClothesID = new getPrice();
-        $str_arr = explode (",", $ids); 
+        $str_arr = explode(",", $ids);
 
         $repairAmount = repair_price::where('repair_id', $str_arr[0])
-            ->where('clothes_id',$str_arr[1])
+            ->where('clothes_id', $str_arr[1])
             ->leftJoin('repairs', '.repair_id', '=', 'repairs.id')
             ->select('amount', 'clothes_id')
             ->get();
 
-            // dd($repairAmount);
+        // dd($repairAmount);
 
-         return response()->json($repairAmount);
+        return response()->json($repairAmount);
     }
 
     public function getAmount_Fabric($ids)
@@ -189,23 +191,49 @@ class AppointmentController extends Controller
             'amount' => 'required',
         ]);
 
+        $getID = $request->input('ids');
+        $getAmount = $request->input('amount');
+
+        $getAdminNumber = User::where('role', 1)
+            ->select('mobilenumber')
+            ->get();
+        $removeFirst = (substr_replace($getAdminNumber, "63", 0, 19));
+        $MobileNumberAdmin = (substr_replace($removeFirst, '', -3));
+
+        $getUserID = appointment::where('appointments.id', $getID)
+            ->leftJoin('users', '.user_id', '=', 'users.id')
+            ->select('fname', 'mname', 'lname')
+            ->get();
+
+        //Getting full Name
+        $FisrtNameWithChar = (substr_replace($getUserID, '', 0, 11));
+        $FirstName = (substr_replace($FisrtNameWithChar, '', -34));
+        $MiddleNameWithChar = (substr_replace($getUserID, '', 0, 26));
+        $MiddleName = (substr_replace($MiddleNameWithChar, '', -19));
+        $LastNameWithChar = (substr_replace($getUserID, '', 0, 41));
+        $LastName = (substr_replace($LastNameWithChar, '', -3));
+        ///
+
+
         $payment = new payment;
-
-        
-     
-        // $payment->appointment_id = $request->input('app_ID');
-        $payment->appointment_id = "1";
-        $payment->amount = $request->input('amount');
-        $payment->type_of_payment="PARTIAL PAYMENT";
+        $payment->appointment_id = $getID;
+        $payment->amount = $getAmount;
+        $payment->type_of_payment = "PARTIAL PAYMENT";
         $payment->accountname = $request->input('accountname');
-        // dd($payment);
-        $payment->accountnumber=$request->input('accountnumber');
-        
-       
-
+        $payment->accountnumber = $request->input('accountnumber');
         $payment->save();
+
+
+        $updateStatus = appointment::find($getID);
+        $updateStatus->status = '4';
+        $updateStatus->save();
+        Nexmo::message()->send([
+            'to' =>  $MobileNumberAdmin,
+            'from' => '639999999999',
+            'text' => 'This is to notify you that Mr./Ms. ' . $FirstName . ' ' . $MiddleName . ' ' . $LastName . ' ' . 'already paid his/her balance amounting of ' . 'PHP ' . $getAmount . ' Reference number ' . $getID
+        ]);
+
         return redirect()->back()->with('success', 'Payment success! Thank you.');
-        
     }
 
     /**

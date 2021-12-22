@@ -27,7 +27,7 @@
             <table id="example" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">Product Code</th>
                         <th scope="col">Product Name</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Prices</th>

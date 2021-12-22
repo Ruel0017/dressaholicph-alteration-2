@@ -13,12 +13,12 @@ class CreateEcommerceTable extends Migration
      */
     public function up()
     {
-        Schema::create('Ecommerce', function (Blueprint $table) {
+        Schema::create('ecommerces', function (Blueprint $table) {
             $table->id();
-            $table->string('ProducName');
-            $table->integer('Quantity');
-            $table->string('ImageLink');
-            $table->decimal('ProductPrice');
+            $table->string('product_name');
+            $table->integer('qty');
+            $table->string('image');
+            $table->decimal('product_price');
             $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAddProductsController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
@@ -55,6 +56,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
 
     Route::get('statusUpdate', [AdminAppController::class, 'update'])->name('admin.statusUpdate');
     Route::post('assignEmployee', [AdminAssignController::class, 'update'])->name('admin.assignUpdate');
+
+    //Add Product Controller
+
+    Route::get('indexProduct', [AdminAddProductsController::class, 'index'])->name('admin.indexProduct');
+    Route::post('addProduct', [AdminAddProductsController::class, 'store'])->name('admin.addProduct');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackHistory']], function () {
@@ -67,7 +73,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::post('CreateAppFabric', [AppointmentController::class, 'CreateAppFabric'])->name('user.CreateAppFabric');
     Route::get('appointment-list', [AppointmentController::class, 'listOfAppointment'])->name('user.listofappointment');
     Route::post('insertpartialpayment', [AppointmentController::class, 'InsertPartialPayment'])->name('user.insertpartialpayment');
-    Route::get('ecommerce', [EcommerceController::class, 'index']) -> name('user.ecommerce');
+    Route::get('ecommerce', [EcommerceController::class, 'index'])->name('user.ecommerce');
 
     //AJAX
     Route::GET('getPrice_FABRIC/{id}', [AppointmentController::class, 'getPrice_FABRIC']);

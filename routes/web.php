@@ -75,6 +75,12 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::post('insertpartialpayment', [AppointmentController::class, 'InsertPartialPayment'])->name('user.insertpartialpayment');
     Route::get('ecommerce', [EcommerceController::class, 'index'])->name('user.ecommerce');
 
+    Route::get('/', [EcommerceController::class, 'index']);  
+    Route::get('cart', [EcommerceController::class, 'cart'])->name('cart');
+    Route::get('add-to-cart/{id}', [EcommerceController::class, 'addToCart'])->name('add.to.cart');
+    Route::patch('update-cart', [EcommerceController::class, 'update'])->name('update.cart');
+    Route::delete('remove-from-cart', [EcommerceController::class, 'remove'])->name('remove.from.cart');
+
     //AJAX
     Route::GET('getPrice_FABRIC/{id}', [AppointmentController::class, 'getPrice_FABRIC']);
     Route::GET('getPrice/{id}', [AppointmentController::class, 'getPrice']);

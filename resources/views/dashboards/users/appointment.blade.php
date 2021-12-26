@@ -41,7 +41,7 @@
                               <div class="card-body">
                                         <div class="tab-content">
                                                   <!-- REPAIR TAB -->
-                                                  <div class="active tab-pane" id="Repair" style="border-style: solid;" >
+                                                  <div class="active tab-pane" id="Repair" style="" >
                                                         <form method="POST" action="{{ route('user.CreateAppointment') }}">   
                                                         @csrf 
                                                             <div class="form-group">

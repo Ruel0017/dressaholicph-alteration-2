@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEcommerceTable extends Migration
+class CreateEcommercesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -30,6 +30,6 @@ class CreateEcommerceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Ecommerce');
+        Schema::dropIfExists('ecommerces');
     }
 }

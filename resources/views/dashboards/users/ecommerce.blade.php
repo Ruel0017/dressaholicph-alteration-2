@@ -3,129 +3,175 @@
 @section('title', 'Appointment')
     
 @section('content')
-
+<!--
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+ 
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="index.html">Our Very Own Products</a>
-        
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-            <!-- <ul class="navbar-nav m-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="category.html">Categories <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="product.html">Product</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cart.html">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
-                </li>
-            </ul> -->
-
-            <form class="form-inline my-2 my-lg-0">
-                <!-- <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary btn-number">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div> -->
-                <a class="btn btn-success btn-sm ml-3" href="cart.html">
-                    <i class="fa fa-shopping-cart"></i> Cart
-                    <!-- <span class="badge badge-light">3</span> -->
-                </a>
-            </form>
-        </div>
     </div>
 </nav>
-<!-- <div class="container">
-    <div class="row">
-        <div class="col">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="category.html">Category</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Sub-category</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-</div> -->
+
 <div class="container">
     <div class="row">
-        <!-- <div class="col-12 col-sm-3"> -->
-            <!-- <div class="card bg-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
-                <ul class="list-group category_block">
-                    <li class="list-group-item"><a href="category.html">Cras justo odio</a></li>
-                    <li class="list-group-item"><a href="category.html">Dapibus ac facilisis in</a></li>
-                    <li class="list-group-item"><a href="category.html">Morbi leo risus</a></li>
-                    <li class="list-group-item"><a href="category.html">Porta ac consectetur ac</a></li>
-                    <li class="list-group-item"><a href="category.html">Vestibulum at eros</a></li>
-                </ul>
-            </div> -->
-            <!-- <div class="card bg-light mb-3">
-                <div class="card-header bg-success text-white text-uppercase">Last product</div>
-                <div class="card-body">
-                    <img class="img-fluid" src="https://dummyimage.com/600x400/55595c/fff" />
-                    <h5 class="card-title">Product title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p class="bloc_left_price">99.00 $</p>
-                </div>
-            </div>
-        </div> -->
+             <p class="btn btn-success btn-sm ml-1">   Shopping Cart  
+             <i class="fa fa-shopping-cart"></i> 
+             <span class="badge badge-light" id="CountCart"></span> 
+            </p>  
+      
+        <table id="MyProducts" class="table table-bordered table-striped">
+                
+        </table>
+           
         <div class="col">
+        <p>Product Catalog</p> 
+        <hr>
             <div class="row">
+            @foreach ($product as $products)
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card">
-                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                        <input type="text" id="ProductID" value="{{ $products->id }}" hidden/>  
+                        <img class="card-img-top" src="\product\{{ $products->image }}" alt="Card image cap"  width="500" height="333">
                         <div class="card-body">
-                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <input type="text"   id="ProductName" name="ProductName" value="{{ $products->product_name }}"  hidden/>  
+                            <h4 class="card-title">  {{ $products->product_name }} </h4>
+                            @if ($products->qty > 0)
+                            <h4 class="card-title" style="float:right;">In stock: {{ $products->qty }}</h4>
+                            @else
+                            <h4 class="card-title" style="float:right">Not available</h4>
+                            @endif
+                            <p class="card-text"></p>
                             <div class="row">
                                 <div class="col">
-                                    <p class="btn btn-danger btn-block">99.00 $</p>
+                                    <p class="btn btn-danger btn-block"  >Php {{ $products->product_price }}</p>
+                                    <input type="text"   id="ProductPrice" name="ProductPrice" value="{{ $products->product_price }}"  hidden/>  
+
+                                <input type="number"  id="ProductQty" class="form-control" size="4" min="1" max={{ $products->qty }}>
+                                @if ($products->qty > 0)
+                            </br>
+                                <button type="button" class="btn btn-success" id="AddToCart" onclick="myFunction()">
+                                Add to cart
+                                </button>
+                                @endif 
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div> 
+        </div>
+      
+
+    </div>
+</div> 
+
+<script>
+function myFunction() {
+  var table = document.getElementById("MyProducts");
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1); 
+  var cell3 = row.insertCell(2);  
+  var cell4 = row.insertCell(3); 
+  var cell5 = row.insertCell(4); 
+  var ProductCode = document.getElementById("ProductID").value;  
+  var ProductName = document.getElementById("ProductName").value;  
+  var Quantity = document.getElementById("ProductQty").value;  
+  var TotalAmount  = document.getElementById("ProductPrice").value; 
+  cell1.innerHTML = ProductCode;
+  cell2.innerHTML = ProductName;
+  cell3.innerHTML = Quantity + ' items';
+  cell4.innerHTML = TotalAmount * Quantity;
+  cell5.innerHTML = " <button type='button' class='btn btn-block btn-danger btn-sm '> Remove </button>"
+}
+</script>
+
+-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+   
+    <link rel="stylesheet" type="text/css" href="css/ecommerce.css">
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-12 main-section">
+            <div class="dropdown">
+                <button type="button" class="btn btn-info" data-toggle="dropdown">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="row total-header-section">
+                        <div class="col-lg-6 col-sm-6 col-6">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
+                        </div>
+                        @php $total = 0 @endphp
+                        @foreach((array) session('cart') as $id => $details)
+                            @php $total += $details['product_price'] * $details['quantity'] @endphp
+                        @endforeach
+                        <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
+                            <p>Total: <span class="text-info">₱ {{ $total }}</span></p>
+                        </div>
+                    </div>
+                    @if(session('cart'))
+                        @foreach(session('cart') as $id => $details)
+                            <div class="row cart-detail">
+                                <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+                                    <img src="\product\{{ $details['image']}}" /> 
                                 </div>
-                                <div class="col">
-                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+                                    <p>{{ $details['product_name'] }}</p>
+                                    <span class="price text-info"> ₱{{ $details['product_price'] }}</span> <span class="count"> Quantity:{{ $details['quantity'] }}</span>
                                 </div>
                             </div>
+                        @endforeach
+                    @endif
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
+                            <a href="{{ route('cart') }}" class="btn btn-primary btn-block">View all</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+  
+  
+<br/>
+<div class="container">
+  
+    @if(session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+        </div> 
+    @endif
+  
+</div>
 
-<!-- Footer -->
-<footer class="text-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-lg-4 col-xl-3">
-                <h5>About</h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                <p class="mb-0">
-                    Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-                </p>
+<div class="row">
+     
+    @foreach($product as $products)
+        <div class="col-xs-18 col-sm-6 col-md-3">
+            <div class="thumbnail">
+            <img src="\product\{{ $products->image }}" alt="IMG to tanga"  style="width:200;height:200px;" class="mx-auto">
+                <div class="caption">
+                    <h4>{{ $products->product_name }}</h4> 
+                    <p><strong>Price: </strong> {{ $products->product_price }}</p>
+                    <p class="btn-holder"><a href="{{ route('add.to.cart', $products->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    @endforeach
+</div>
 
 @endsection
+

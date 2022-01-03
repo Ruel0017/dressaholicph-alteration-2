@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\MailApproval;
 use App\Models\appointment;
+use App\Models\payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Nexmo\Laravel\Facade\Nexmo;
+use Illuminate\Support\Facades\DB;
 
 class AdminAppController extends Controller
 {
@@ -33,6 +35,19 @@ class AdminAppController extends Controller
         $appointment = appointment::All();
 
         return view('dashboards.admins.appointmentlist', compact('appointment'));
+    }
+
+    public function paymentHistory()
+    {
+        $payment = payment::All();
+        $totalAmount =   DB::table('payments')
+                            ->select( DB::raw('SUM(amount) as TotalSales'))
+                            ->get();
+        // // ->get();
+
+        // dd( $totalAmount);
+
+        return view('dashboards.admins.paymenthistory', compact('payment','totalAmount'));
     }
 
 

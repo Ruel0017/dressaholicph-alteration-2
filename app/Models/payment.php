@@ -19,5 +19,6 @@ class payment extends Model
         'type_of_payment',
         'accountname',
         'accountnumber',
+        'user_id',
     ];
 }

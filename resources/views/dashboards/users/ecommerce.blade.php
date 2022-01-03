@@ -164,9 +164,16 @@ function myFunction() {
             <div class="thumbnail">
             <img src="\product\{{ $products->image }}" alt="IMG to tanga"  style="width:200;height:200px;" class="mx-auto">
                 <div class="caption">
+                    <input type="text" name="product_id" value="$products->id" hidden/>
                     <h4>{{ $products->product_name }}</h4> 
                     <p><strong>Price: </strong> {{ $products->product_price }}</p>
+                    @if( $products->qty  > 0) 
+                    <p><strong>In Stock: </strong> {{ $products->qty }}</p>
                     <p class="btn-holder"><a href="{{ route('add.to.cart', $products->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
+                    @else
+                    <p><strong>No Stock </strong> </p>
+                    @endif
+                  
                 </div>
             </div>
         </div>

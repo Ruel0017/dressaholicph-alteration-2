@@ -52,6 +52,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
 
     Route::get('assign', [AdminAssignController::class, 'index'])->name('admin.assign');
 
+    Route::get('paymenthistory', [AdminAppController::class, 'paymentHistory'])->name('admin.paymenthistory');
+
     //Update
 
     Route::get('statusUpdate', [AdminAppController::class, 'update'])->name('admin.statusUpdate');
@@ -80,6 +82,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::get('add-to-cart/{id}', [EcommerceController::class, 'addToCart'])->name('add.to.cart');
     Route::patch('update-cart', [EcommerceController::class, 'update'])->name('update.cart');
     Route::delete('remove-from-cart', [EcommerceController::class, 'remove'])->name('remove.from.cart');
+
+    Route::post('Ecommerce_CheckOut', [EcommerceController::class, 'Ecommerce_CheckOut'])->name('user.Ecommerce_CheckOut');
+ 
 
     //AJAX
     Route::GET('getPrice_FABRIC/{id}', [AppointmentController::class, 'getPrice_FABRIC']);

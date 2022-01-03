@@ -68,13 +68,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="" id="editStatus">
+                <form method="POST" action="{{ route('user.Ecommerce_CheckOut') }}"  >
                     @csrf
                     <div class="modal-body">
-                        <div class="callout callout-danger">
+                        <!-- <div class="callout callout-danger">
                             <h5> Disclaimer : </h5>
                             <p>Hi shopper! This payment is for 50% to make a legitimate transaction to our shop. Other 50% will be your payment balance to make a succesful payment.</p>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <div class="form-group">
@@ -118,7 +118,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="amount">Amount to pay</label>
-                                <input type="text" class="form-control" id="e_amount" name="amount" value="₱  {{ $total / 2 }} " readonly>
+                                <input type="text" class="form-control" id="e_amount" name="amount" value="  {{ $total }} " readonly>
                                 <span class="text-danger">@error('amount'){{ $message }}@enderror</span>
                                 </div>
                                 <div class="form-group">

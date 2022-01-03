@@ -42,7 +42,7 @@
                             <td class="ids text-center">{{ $products->id }}</td>
                             <td>{{ $products->product_name }}</td>
                             <td>{{ $products->qty }}</td>
-                            <td>{{ $products->product_price }}</td>
+                            <td>₱ {{ $products->product_price }}</td>
                             <td><img src="\product\{{ $products->image }}" alt="IMG to tanga"
                                     style="width:60px;height:60px;" class="mx-auto"></td>
                             {{-- <td>

@@ -15,7 +15,7 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->integer('appointment_id')->nullable();
+            $table->string('appointment_id')->nullable();
             $table->decimal('amount');
             $table->string('type_of_payment')->nullable(); //default value partial paid
             $table->string('accountname');

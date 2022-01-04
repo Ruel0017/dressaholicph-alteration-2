@@ -53,6 +53,10 @@ class repairSeed extends Seeder
                 'repairName' => 'Zipper',
                 'created_at' => Carbon::now(),
             ],
+            [
+                'repairName' => 'N/A',
+                'created_at' => Carbon::now(),
+            ],
         ];
 
         DB::table('repairs')->insert($repair);

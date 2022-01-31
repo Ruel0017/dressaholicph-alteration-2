@@ -75,7 +75,7 @@
                             <div class="col-sm-9">
                                 <input type="text" id="e_status" name="status" class="form-control" value="" hidden />
                                 <select class="form-control text-left" name="status">
-                                    <option selected value="">Please Select Your Payment</option>
+                                    <option selected value="">Update Status</option>
                                     <option value="1">Denied</option>
                                     <option value="3">Approved</option>
                                 </select>

@@ -142,6 +142,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <p class="small">List of Appointment</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.pickupdate') }}"
+                                        class="nav-link {{ request()->is('admin/pickupdate*') ? 'active' : '' }}">
+                                        <i class="fa fa-calendar nav-icon"></i>
+                                        <p class="small">Pickup date and time</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -283,6 +290,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             console.log(getMobile.trim().replace('0', '63'))
             $('#assignUpdate').attr('action', '{{ route('admin.assignUpdate') }}');
+        });
+    </script>
+
+    <script>
+        // update status
+        $(document).on('click', '.updateStatus', function() {
+            var _this = $(this).parents('tr');
+            $('#idUpdate').val(_this.find('.idUpdate').text());
+            var test = $('#e_ids1').val(_this.find('.ids1').text());
+
+            console.log(test)
+
+            $('#updateStatus').attr('action', '{{ route('admin.updateStatus') }}');
         });
     </script>
 

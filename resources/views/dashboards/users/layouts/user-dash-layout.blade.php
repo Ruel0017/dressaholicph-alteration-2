@@ -122,34 +122,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-table"></i>
-                                <p>
-                                    Appointment
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
+                            <a href="{{ route('user.appointment') }}"
+                                class="nav-link {{ request()->is('user/appointment*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-calendar"></i>
+                                <p>Create Appointment</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('user.appointment') }}"
-                                        class="nav-link {{ request()->is('user/appointment*') ? 'active' : '' }}">
-                                        <i class="fa fa-calendar nav-icon"></i>
-                                        <p class="small">Create Appointment</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('user.listofappointment') }}"
-                                        class="nav-link {{ request()->is('user/appointment-list*') ? 'active' : '' }}">
-                                        <i class="fa fa-list nav-icon"></i>
-                                        <p class="small">List of my Appointment</p>
-                                    </a>
-                                </li> 
-                            </ul>
-                            <li class="nav-item">
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('user.ecommerce') }}"
                                 class="nav-link {{ request()->is('user/ecommerce*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
-                                <p class="small"> Buy our Products! </p>
+                                <p> Buy our Products! </p>
                             </a>
                         </li>
                     </ul>

@@ -65,4 +65,15 @@ class AdminAssignController extends Controller
 
         return redirect()->back()->with('success', 'Appointment has been confirmed');
     }
+
+    public function updateStatus(Request $request)
+    {
+        $getID = $request->input('ids1');
+
+        $updateStatus = appointment::find($getID);
+        $updateStatus->status = '5';
+        $updateStatus->save();
+
+        return redirect()->back()->with('success', 'Successfully Updated');
+    }
 }

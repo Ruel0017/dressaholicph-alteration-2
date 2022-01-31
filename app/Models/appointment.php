@@ -22,7 +22,8 @@ class appointment extends Model
         'appointment_date',
         'totalAmount',
         'approvedBy',
-        'emp_id'
+        'emp_id',
+        'pickup_date'
     ];
 
     public function clothes()

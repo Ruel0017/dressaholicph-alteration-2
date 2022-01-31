@@ -34,7 +34,7 @@
                 <tbody>
                     @foreach ($appointment as $appointments)
                         <tr>
-                            <td class="ids text-center">{{ $appointments->id }}</td>
+                            <td class="ids ids1 text-center">{{ $appointments->id }}</td>
                             <td>{{ $appointments->statusName->status }}</td>
                             <td>{{ $appointments->users->fname . ' ' . $appointments->users->lname }}</td>
                             <td>{{ $appointments->clothes->clothesName }}</td>
@@ -47,10 +47,15 @@
                                         data-toggle="modal" data-idUpdate="''" data-target="#userUpdate">Perform
                                         Action</button>
                                 </td>
+                            @elseif($appointments->status == 6)
+                                <td>
+                                    <button type="button" class="btn btn-block btn-primary btn-sm updateStatus"
+                                        data-toggle="modal" data-idUpdate="''" data-target="#userUpdate1">Perform
+                                        Action</button>
+                                </td>
                             @else
                                 <td>
-                                    <button type="submit" class="btn btn-block btn-danger btn-sm disabled" disabled
-                                        data-toggle="modal" data-target="#modal-lg">Already Assigned</button>
+
                                 </td>
                             @endif
                             <td class="number text-center" hidden>{{ $appointments->users->mobilenumber }}</td>
@@ -91,6 +96,48 @@
                                     @foreach ($employee as $employees)
                                         <option value={{ $employees->id }}>{{ $employees->fullname }}</option>
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i
+                                class="icofont icofont-eye-alt"></i>Close</button>
+                        <button type="submit" id="" name="" class="btn btn-success  waves-light"><i
+                                class="icofont icofont-check-circled"></i>Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- End modal --}}
+
+    <!-- Modal Update for final step-->
+    <div class="modal fade" id="userUpdate1" tabindex="-1" role="dialog" style="z-index: 1050; display: none;"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-write">
+                    <h4 class="modal-title">List of Employee</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="ti-close"></i></span>
+                    </button>
+                </div>
+                <form action="" method="POST" id="updateStatus">
+                    {{ csrf_field() }}
+                    <input type="text" hidden class="col-sm-9 form-control" id="idUpdate" name="idUpdate" value="" />
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-sm-9">
+                                <input type="text" id="e_ids1" name="ids1" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Update Status</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="e_status" name="status" class="form-control" value="" hidden />
+                                <select class="form-control text-left" name="status_id">
+                                    <option value="5">Fully Paid</option>
                                 </select>
                             </div>
                         </div>

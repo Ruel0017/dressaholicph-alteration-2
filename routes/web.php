@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AdminAppController;
 use App\Http\Controllers\Admin\AdminAssignController;
+use App\Http\Controllers\Admin\AdminPickupDateandTime;
 use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\UserController;
@@ -58,11 +59,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
 
     Route::get('statusUpdate', [AdminAppController::class, 'update'])->name('admin.statusUpdate');
     Route::post('assignEmployee', [AdminAssignController::class, 'update'])->name('admin.assignUpdate');
+    Route::post('updateStatus', [AdminAssignController::class, 'updateStatus'])->name('admin.updateStatus');
 
     //Add Product Controller
 
     Route::get('indexProduct', [AdminAddProductsController::class, 'index'])->name('admin.indexProduct');
     Route::post('addProduct', [AdminAddProductsController::class, 'store'])->name('admin.addProduct');
+
+    //Pickup date and time
+
+    Route::get('pickupdate', [AdminPickupDateandTime::class, 'index'])->name('admin.pickupdate');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackHistory']], function () {
@@ -77,14 +83,14 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::post('insertpartialpayment', [AppointmentController::class, 'InsertPartialPayment'])->name('user.insertpartialpayment');
     Route::get('ecommerce', [EcommerceController::class, 'index'])->name('user.ecommerce');
 
-    Route::get('/', [EcommerceController::class, 'index']);  
+    Route::get('/', [EcommerceController::class, 'index']);
     Route::get('cart', [EcommerceController::class, 'cart'])->name('cart');
     Route::get('add-to-cart/{id}', [EcommerceController::class, 'addToCart'])->name('add.to.cart');
     Route::patch('update-cart', [EcommerceController::class, 'update'])->name('update.cart');
     Route::delete('remove-from-cart', [EcommerceController::class, 'remove'])->name('remove.from.cart');
 
     Route::post('Ecommerce_CheckOut', [EcommerceController::class, 'Ecommerce_CheckOut'])->name('user.Ecommerce_CheckOut');
- 
+
 
     //AJAX
     Route::GET('getPrice_FABRIC/{id}', [AppointmentController::class, 'getPrice_FABRIC']);

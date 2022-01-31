@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterPaymentsTable extends Migration
+class AlterAppointmentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('payments', function (Blueprint $table) {
-            $table->integer('user_id')->nullable();
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->string('pickup_date')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AlterPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('payments', function (Blueprint $table) {
-            $table->dropColumn('user_id');
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->dropColumn('pickup_date');
         });
     }
 }

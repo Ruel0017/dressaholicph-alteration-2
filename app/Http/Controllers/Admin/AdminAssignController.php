@@ -25,6 +25,7 @@ class AdminAssignController extends Controller
     {
         $getID = $request->input('ids');
         $EmpId = $request->input('emp_id');
+        $pickUpdate = $request->input('pickupdate');
 
         $getUserID = appointment::where('appointments.id', $getID)
             ->leftJoin('users', '.user_id', '=', 'users.id')
@@ -34,33 +35,32 @@ class AdminAssignController extends Controller
             ->select('appointment_date')
             ->get();
 
-        $ScheduleFront  = (substr_replace($ScheduleChar, '', 0, 22));
-        $Schedule = (substr_replace($ScheduleFront, '', -3));
+        $Schedules = [$ScheduleChar[0]['appointment_date']];
 
-
+        $Schedule = implode($Schedules);
 
         //Getting full Name
-        $FisrtNameWithChar = (substr_replace($getUserID, '', 0, 11));
-        $FirstName = (substr_replace($FisrtNameWithChar, '', -34));
+        $FirstNames = [$getUserID[0]['fname']];
+        $FirstName = implode($FirstNames);
         ///
-
         $getEmpID = employee::where('id', $EmpId)
             ->select('fullname')
             ->get();
 
-        $EmpNameWithChar = (substr_replace($getEmpID, '', 0, 14));
-        $EmpName = (substr_replace($EmpNameWithChar, '', -3));
+        $EmpNames = [$getEmpID[0]['fullname']];
+        $EmpName = implode($EmpNames);
 
         $getMobileNumber = $request->input('number');
 
         $AssignEmp = appointment::find($getID);
         $AssignEmp->status = '6';
         $AssignEmp->emp_id = $EmpId;
+        $AssignEmp->pickup_date = $pickUpdate;
         $AssignEmp->save();
         Nexmo::message()->send([
             'to' =>  $getMobileNumber,
             'from' => '639999999991',
-            'text' => 'Hi ' . $FirstName . ', your appointment has been confirmed. Please come at ' . $Schedule . ' and find ' . $EmpName . '. Landmark : in front of Charis Central Academy '
+            'text' => 'Hi ' . $FirstName . ', your appointment has been confirmed. Please come at ' . $Schedule . ' and find ' . $EmpName . '. Landmark : in front of Charis Central Academy your pickup date is ' . $pickUpdate
         ]);
 
         return redirect()->back()->with('success', 'Appointment has been confirmed');

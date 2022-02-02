@@ -16,6 +16,7 @@
                         <th scope="col">Clothes</th>
                         <th scope="col">Repair</th>
                         <th scope="col">Appointment Date and Time</th>
+                        <th scope="col">Pickup Date and Time</th>
                         <th scope="col">Total Amount</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -32,6 +33,7 @@
                             <td class="clothesName">{{ $appointments->clothes->clothesName }}</td>
                             <td class="repairName">{{ $appointments->repair->repairName }}</td>
                             <td class="date">{{ $appointments->appointment_date }}</td>
+                            <td>{{ $appointments->pickup_date ? $appointments->pickup_date : 'N/A' }}</td>
                             <td class="totalAmount">{{ $appointments->totalAmount }}</td>
                             <td hidden class="approved">{{ Auth::user()->fname . ' ' . Auth::user()->lname }}
                             <td hidden class="email">{{ $appointments->users->mobilenumber }}

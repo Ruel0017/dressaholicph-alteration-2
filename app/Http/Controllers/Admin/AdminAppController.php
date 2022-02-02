@@ -41,13 +41,13 @@ class AdminAppController extends Controller
     {
         $payment = payment::All();
         $totalAmount =   DB::table('payments')
-                            ->select( DB::raw('SUM(amount) as TotalSales'))
-                            ->get();
+            ->select(DB::raw('SUM(amount) as TotalSales'))
+            ->get();
         // // ->get();
 
         // dd( $totalAmount);
 
-        return view('dashboards.admins.paymenthistory', compact('payment','totalAmount'));
+        return view('dashboards.admins.paymenthistory', compact('payment', 'totalAmount'));
     }
 
 

@@ -99,6 +99,32 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-3 col-form-label">Pick-up date</label>
+                            <div class="col-sm-9">
+                                <input class="date form-control text-right" type="text" id='date' name='date'
+                                    autocomplete="off" required>
+                                <span class="fa fa-calendar calendarspan"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="time" class="col-sm-3 col-form-label">Time</label>
+                            <div class="col-sm-9">
+                                <select class="form-control text-left" name="time">
+                                    <option selected value="">Please Select Your Time</option>
+                                    <option value="8:00 AM">8:00 AM</option>
+                                    <option value="9:00 AM">9:00 AM</option>
+                                    <option value="10:00 AM">10:00 AM</option>
+                                    <option value="11:00 AM">11:00 AM</option>
+                                    <option value="1:00 PM">1:00 PM</option>
+                                    <option value="2:00 PM">2:00 PM</option>
+                                    <option value="3:00 PM">3:00 PM</option>
+                                    <option value="4:00 PM">4:00 PM</option>
+                                    <option value="5:00 PM">5:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input class="col-6" type="text" name="pickupdate" hidden>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i
@@ -129,7 +155,7 @@
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-9">
-                                <input type="text" id="e_ids1" name="ids1" class="form-control" />
+                                <input type="text" id="e_ids1" name="ids1" class="form-control" hidden />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -153,5 +179,26 @@
         </div>
     </div>
     {{-- End modal --}}
+
+    <script type="text/javascript">
+        var date = new Date();
+        date.setDate(date.getDate());
+
+        let input = $('[name = "date"],[name = "time"]')
+        let appointmentDate = $("input[name='date']");
+        let appointmentTime = $('[name = "time"]');
+        let pickUpDate = $('[name = "pickupdate"]');
+
+        $('.date').datepicker({
+            startDate: date,
+            format: 'yyyy-mm-dd',
+
+        });
+
+        input.change(function() {
+            pickUpDate.val(appointmentDate.val() + ' ' + appointmentTime.val());
+        })
+    </script>
+
 
 @endsection

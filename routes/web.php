@@ -69,6 +69,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
     //Pickup date and time
 
     Route::get('pickupdate', [AdminPickupDateandTime::class, 'index'])->name('admin.pickupdate');
+    Route::post('updatePickupDate', [AdminPickupDateandTime::class, 'update'])->name('admin.updatePickupDate');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackHistory']], function () {

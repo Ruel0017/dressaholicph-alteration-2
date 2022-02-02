@@ -300,8 +300,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $('#idUpdate').val(_this.find('.idUpdate').text());
             var test = $('#e_ids1').val(_this.find('.ids1').text());
 
-            console.log(test)
-
             $('#updateStatus').attr('action', '{{ route('admin.updateStatus') }}');
         });
     </script>

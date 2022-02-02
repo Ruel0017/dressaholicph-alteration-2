@@ -304,6 +304,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     </script>
 
+    <script>
+        // update pickupdate
+        $(document).on('click', '.updatePickupDate', function() {
+            var _this = $(this).parents('tr');
+            $('#idUpdate').val(_this.find('.idUpdate').text());
+            var test = $('#e_ids').val(_this.find('.ids').text());
+
+            $('#updatePickupDate').attr('action', '{{ route('admin.updatePickupDate') }}');
+        });
+    </script>
+
     <!-- DataTables  & Plugins -->
     <script src="plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

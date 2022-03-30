@@ -7,15 +7,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AdminAppController;
 use App\Http\Controllers\Admin\AdminAssignController;
 use App\Http\Controllers\Admin\AdminPickupDateandTime;
-use App\Http\Controllers\EmailsController;
-use App\Http\Controllers\SmsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Users\AppointmentController;
 use App\Http\Controllers\Users\EcommerceController;
-use App\Mail\MailApproval;
-use App\Models\appointment;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,3 +96,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::GET('getAmount_Fabric/{id}', [AppointmentController::class, 'getAmount_Fabric']);
     Route::POST('getAmount', [AppointmentController::class, 'getAmount'])->name('getAmount');
 });
+
+
+Route::get('generate-pdf', [PDFController::class, 'generatePDF']);

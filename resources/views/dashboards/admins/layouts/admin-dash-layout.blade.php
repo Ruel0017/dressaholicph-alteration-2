@@ -36,7 +36,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" oncontextmenu="return false" onkeydown="return false;"
+    onmousedown="return false;">
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -113,13 +114,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-table"></i>
-                                <p>
-                                    Appointment
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
+                            @if (\Auth::user()->is_guest == 0)
+                                <a href="#" class="nav-link ">
+                                    <i class="nav-icon fas fa-table"></i>
+                                    <p>
+                                        Appointment
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                            @else
+                                <a href="#" class="nav-link disabled">
+                                    <i class="nav-icon fas fa-table"></i>
+                                    <p>
+                                        Appointment
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                            @endif
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('admin.assign') }}"
@@ -152,22 +163,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.indexProduct') }}"
-                                class="nav-link {{ request()->is('admin/indexProduct*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-shopping-cart"></i>
-                                <p>
-                                    Add Product
-                                </p>
-                            </a>
+                            @if (\Auth::user()->is_guest == 0)
+                                <a href="{{ route('admin.indexProduct') }}"
+                                    class="nav-link {{ request()->is('admin/indexProduct*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-shopping-cart"></i>
+                                    <p>
+                                        Add Product
+                                    </p>
+                                </a>
+                            @else
+                                <a href="{{ route('admin.indexProduct') }}"
+                                    class="nav-link disabled {{ request()->is('admin/indexProduct*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-shopping-cart"></i>
+                                    <p>
+                                        Add Product
+                                    </p>
+                                </a>
+                            @endif
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.paymenthistory') }}"
-                                class="nav-link {{ request()->is('admin/paymenthistory*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Payment History
-                                </p>
-                            </a>
+                            @if (\Auth::user()->is_guest == 0)
+                                <a href="{{ route('admin.paymenthistory') }}"
+                                    class="nav-link {{ request()->is('admin/paymenthistory*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Payment History
+                                    </p>
+                                </a>
+                            @else
+                                <a href="{{ route('admin.paymenthistory') }}"
+                                    class="nav-link disabled {{ request()->is('admin/paymenthistory*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Payment History
+                                    </p>
+                                </a>
+                            @endif
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.settings') }}"

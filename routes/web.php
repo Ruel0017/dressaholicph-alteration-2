@@ -19,7 +19,7 @@ use App\Http\Controllers\Users\EcommerceController;
 use App\Mail\MailApproval;
 use App\Models\appointment;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,3 +111,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::GET('getAmount_Fabric/{id}', [AppointmentController::class, 'getAmount_Fabric']);
     Route::POST('getAmount', [AppointmentController::class, 'getAmount'])->name('getAmount');
 });
+
+
+Route::get('generate-pdf', [PDFController::class, 'generatePDF']);

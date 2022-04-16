@@ -82,7 +82,7 @@
                                 <input type="text" hidden class="col-sm-9 form-control" id="idUpdate" name="idUpdate"
                                     value="" />
 
-
+                                <!--
                                 <label for="listOfPayment">Channel of Payment</label>
 
                                 <select class="form-control text-left" name="time" id="dlist" onChange="swapImage()"
@@ -113,25 +113,30 @@
                                         value="['https://www.gtcapital.com.ph/storage/uploads/2017/09/59bc94ce59565.png', '8']">
                                         METROBANK</option>
                                 </select>
-                                <br>
-                                <img id="imageToSwap" src="" width="70" height="30" hidden />
+                                <br> -->!
+                                <img id="imageToSwap" src="https://logos-download.com/wp-content/uploads/2020/06/GCash_Logo_text.png" width="70" height="30" />
                             </div>
                             <div class="form-group">
                                 <label for="amount">Amount to pay</label>
-                                <input type="text" class="form-control" id="e_amount" name="amount" readonly>
+                                <input type="text" class="form-control" id="e_amount" name="amount" value="  {{ $total }} " readonly>
                                 <span class="text-danger">@error('amount'){{ $message }}@enderror</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="accountnumber">Account Number</label>
+                            </div>
+                            <div class="form-group">
+                                    <label for="accountname">Account No.</label>
+                                    <input type="text" class="form-control" name="accountname" placeholder="" required>
+                                    <span class="text-danger">@error('accountname'){{ $message }}@enderror</span>
+                            </div>
+                            <div class="form-group">
+                                    <label for=" accountnumber">Account Name</label>
                                     <input type="text" class="form-control" name="accountnumber" placeholder="" required>
                                     <span class="text-danger">@error('accountnumber'){{ $message }}@enderror</span>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="accountname">Account Name</label>
-                                        <input type="text" class="form-control" name="accountname" placeholder="" required>
-                                        <span class="text-danger">@error('accountname'){{ $message }}@enderror</span>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <label for="referenceno">Reference No</label>
+                                    <input type="text" class="form-control" name="referenceno" placeholder="" required>
+                                    <span class="text-danger">@error('referenceno'){{ $message }}@enderror</span>
+                            </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
                                         </button>

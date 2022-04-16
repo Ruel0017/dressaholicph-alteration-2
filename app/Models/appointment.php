@@ -53,4 +53,8 @@ class appointment extends Model
     {
         return $this->belongsTo(employee::class, 'id', 'emp_id');
     }
+    public function payments()
+    {
+        return $this->belongsTo(payment::class, 'id','appointment_id');
+    }
 }

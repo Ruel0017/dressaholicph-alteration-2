@@ -216,11 +216,12 @@ class AppointmentController extends Controller
 
 
         $payment = new payment;
-        $payment->appointment_id = $getID;
+        $payment->appointment_id = $getID; //date('YmdHis');
         $payment->amount = $getAmount;
         $payment->type_of_payment = "PARTIAL PAYMENT";
         $payment->accountname = $request->input('accountname');
         $payment->accountnumber = $request->input('accountnumber');
+        $payment->reference_number = $request->input('referenceno');
         $payment->save();
 
 

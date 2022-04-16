@@ -97,6 +97,7 @@ class EcommerceController extends Controller
         $payment->type_of_payment = "ECOMMERCE PARTIAL PAYMENT";
         $payment->accountname = $request->input('accountname');
         $payment->accountnumber = $request->input('accountnumber'); 
+        $payment->reference_number = $request->input('referenceno');
         $payment->save();
 
         foreach ($cart as $p) 

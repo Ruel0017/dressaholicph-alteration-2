@@ -48,8 +48,7 @@ class AdminAppController extends Controller
         // dd( $totalAmount);
 
         return view('dashboards.admins.paymenthistory', compact('payment', 'totalAmount'));
-    }
-
+    } 
 
     public function update(Request $request)
     {

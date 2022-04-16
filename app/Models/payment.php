@@ -16,9 +16,8 @@ class payment extends Model
     protected $fillable = [
         'appointment_id',
         'amount',
-        'type_of_payment',
-        'accountname',
-        'accountnumber',
+        'type_of_payment', 
         'user_id',
+        'reference_number'
     ];
 }

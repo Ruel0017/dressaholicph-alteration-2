@@ -3,6 +3,7 @@
 
 @section('content')
 
+
 <div class="card">
         <div class="card-header">
             <h3 class="card-title">Product</h3>
@@ -22,6 +23,7 @@
                         <th scope="col">Type of payment</th>
                         <th scope="col">Account Name</th>
                         <th scope="col">Account Number</th>
+                        <th scope="col">Reference Number</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Payment Date</th>
 
@@ -35,6 +37,7 @@
                             <td>{{ $payments->type_of_payment }}</td>
                             <td>{{ $payments->accountname }}</td>
                             <td>{{ $payments->accountnumber }}</td>
+                            <td>{{ $payments->reference_number }}</td>
                             <td> ₱{{ $payments->amount }}</td>
                             <td>{{ $payments->created_at }}</td>
                     @endforeach
@@ -45,5 +48,6 @@
             </table>
         </div>
     </div>
+
 
 @endsection

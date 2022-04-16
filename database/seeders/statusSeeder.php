@@ -44,6 +44,10 @@ class statusSeeder extends Seeder
                 'status' => 'N/A',
                 'created_at' => Carbon::now()
             ],
+            [
+                'status' => 'Payment Confirmed', 
+                'created_at' => Carbon::now()
+            ],
 
         ];
 

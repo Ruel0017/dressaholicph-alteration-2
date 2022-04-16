@@ -7,11 +7,15 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AdminAppController;
 use App\Http\Controllers\Admin\AdminAssignController;
 use App\Http\Controllers\Admin\AdminPickupDateandTime;
+use App\Http\Controllers\Admin\AdminPendingPaymentController;
+
 use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Users\AppointmentController;
 use App\Http\Controllers\Users\EcommerceController;
+
+
 use App\Mail\MailApproval;
 use App\Models\appointment;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +59,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
 
     Route::get('paymenthistory', [AdminAppController::class, 'paymentHistory'])->name('admin.paymenthistory');
 
+    
+
     //Update
 
     Route::get('statusUpdate', [AdminAppController::class, 'update'])->name('admin.statusUpdate');
@@ -70,6 +76,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
 
     Route::get('pickupdate', [AdminPickupDateandTime::class, 'index'])->name('admin.pickupdate');
     Route::post('updatePickupDate', [AdminPickupDateandTime::class, 'update'])->name('admin.updatePickupDate');
+   
+    //pending payment
+    Route::post('updatePaymentStatus', [AdminPendingPaymentController::class, 'updatepaymentstatus'])->name('admin.updatePaymentStatus');
+    Route::get('pendingpage', [AdminPendingPaymentController::class, 'PendingPayments'])->name('admin.pendingpage');
+
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackHistory']], function () {

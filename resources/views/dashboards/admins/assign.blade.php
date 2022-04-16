@@ -41,7 +41,7 @@
                             <td>{{ $appointments->repair->repairName }}</td>
                             <td>{{ $appointments->appointment_date }}</td>
                             <td>{{ $appointments->totalAmount }}</td>
-                            @if ($appointments->status == 4)
+                            @if ($appointments->status == 8)
                                 <td>
                                     <button type="button" class="btn btn-block btn-primary btn-sm assignEmp"
                                         data-toggle="modal" data-idUpdate="''" data-target="#userUpdate">Perform

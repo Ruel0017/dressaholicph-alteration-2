@@ -111,7 +111,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Profile
                                 </p>
                             </a>
-                        </li>
+                        </li> 
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-table"></i>
@@ -121,11 +122,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.assign') }}"
-                                        class="nav-link {{ request()->is('admin/assign*') ? 'active' : '' }}">
-                                        <i class="fa fa-plus nav-icon"></i>
-                                        <p class="small">Assign</p>
+                            <li class="nav-item">
+                                    <a href="{{ route('admin.appointmentlist') }}"
+                                        class="nav-link {{ request()->is('admin/appointmentlist*') ? 'active' : '' }}">
+                                        <i class="fa fa-list nav-icon"></i>
+                                        <p class="small">List of Appointment</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -134,23 +135,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <i class="fa fa-thumbs-up nav-icon"></i>
                                         <p class="small">For Approval</p>
                                     </a>
-                                </li>
+                                </li>    
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.appointmentlist') }}"
-                                        class="nav-link {{ request()->is('admin/appointmentlist*') ? 'active' : '' }}">
-                                        <i class="fa fa-list nav-icon"></i>
-                                        <p class="small">List of Appointment</p>
+                                    <a href="{{ route('admin.pendingpage') }}"
+                                        class="nav-link {{ request()->is('admin/pendingpage*') ? 'active' : '' }}">
+                                        <i class="fa fa-money-bill nav-icon"></i>
+                                        <p class="small">Pending Payments</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.assign') }}"
+                                        class="nav-link {{ request()->is('admin/assign*') ? 'active' : '' }}">
+                                        <i class="fa fa-plus nav-icon"></i>
+                                        <p class="small">Assign</p>
+                                    </a>
+                                </li>
+                             
+                               
                                 <li class="nav-item">
                                     <a href="{{ route('admin.pickupdate') }}"
                                         class="nav-link {{ request()->is('admin/pickupdate*') ? 'active' : '' }}">
                                         <i class="fa fa-calendar nav-icon"></i>
                                         <p class="small">Pickup date and time</p>
                                     </a>
-                                </li>
+                                </li> 
                             </ul>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-walking"></i>
+                                <p>
+                                    Walk-In
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                    <a href="{{ route('admin.appointmentlist') }}"
+                                        class="nav-link {{ request()->is('admin/appointmentlist*') ? 'active' : '' }}">
+                                        <i class="fa fa-list nav-icon"></i>
+                                        <p class="small">Appointment & Registration</p>
+                                    </a>
+                            </li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item">
                             <a href="{{ route('admin.indexProduct') }}"
                                 class="nav-link {{ request()->is('admin/indexProduct*') ? 'active' : '' }}">
@@ -312,6 +342,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             var test = $('#e_ids').val(_this.find('.ids').text());
 
             $('#updatePickupDate').attr('action', '{{ route('admin.updatePickupDate') }}');
+        });
+    </script>
+
+    <script>
+        // confirm payment
+        $(document).on('click', '.confirmPayments', function() {
+            var _this = $(this).parents('tr');
+            $('#idUpdate').val(_this.find('.idUpdate').text());
+            var test = $('#e_ids2').val(_this.find('.ids2').text());
+
+            $('#confirmPayments').attr('action', '{{ route('admin.updatePaymentStatus') }}');
         });
     </script>
 

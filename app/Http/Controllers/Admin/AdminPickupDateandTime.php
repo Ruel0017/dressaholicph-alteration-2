@@ -10,7 +10,7 @@ class AdminPickupDateandTime extends Controller
 {
     public function index()
     {
-        $listOfAppointment = appointment::where('status', 4)
+        $listOfAppointment = appointment::where('status', 6)
             ->get();
         return view('dashboards.admins.pickupdate', compact('listOfAppointment'));
     }

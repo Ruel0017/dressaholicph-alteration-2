@@ -12,7 +12,7 @@ class AdminAssignController extends Controller
 {
     public function index()
     {
-        $Status = ([6, 4]);
+        $Status = ([8,6]);
 
         $appointment = appointment::whereIn('status', $Status)
             ->get();

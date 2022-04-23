@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminAppController;
 use App\Http\Controllers\Admin\AdminAssignController;
 use App\Http\Controllers\Admin\AdminPickupDateandTime;
 use App\Http\Controllers\Admin\AdminPendingPaymentController;
+use App\Http\Controllers\Admin\AdminWalkinController;
 
 use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\SmsController;
@@ -59,7 +60,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
 
     Route::get('paymenthistory', [AdminAppController::class, 'paymentHistory'])->name('admin.paymenthistory');
 
-    
+   
 
     //Update
 
@@ -81,6 +82,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
     Route::post('updatePaymentStatus', [AdminPendingPaymentController::class, 'updatepaymentstatus'])->name('admin.updatePaymentStatus');
     Route::get('pendingpage', [AdminPendingPaymentController::class, 'PendingPayments'])->name('admin.pendingpage');
 
+    //Walkin page
+    Route::get('walkin', [AdminWalkinController::class, 'index'])->name('admin.walkin');
+    Route::post('insertWalkin', [AdminWalkinController::class, 'store'])->name('admin.walkinStore');
+
+
+    //AJAX
+    Route::GET('getPrice_FABRIC/{id}', [AppointmentController::class, 'getPrice_FABRIC']);
+    Route::GET('getPrice/{id}', [AppointmentController::class, 'getPrice']);
+    Route::GET('getAmount/{id}', [AppointmentController::class, 'getAmount']);
+    Route::GET('getAmount_Fabric/{id}', [AppointmentController::class, 'getAmount_Fabric']);
+    Route::POST('getAmount', [AppointmentController::class, 'getAmount'])->name('getAmount');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackHistory']], function () {

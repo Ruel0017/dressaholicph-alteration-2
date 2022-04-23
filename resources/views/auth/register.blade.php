@@ -38,7 +38,7 @@
                                 @endif
                                 @csrf
 
-                                <div class="form-group">
+                                    <div class="form-group">
                                     <label for="fname">First Name</label>
                                     <input id="fname" type="text" class="form-control" name="fname" required
                                         placeholder="First Name">

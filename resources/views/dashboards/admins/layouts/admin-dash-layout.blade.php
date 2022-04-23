@@ -36,8 +36,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="hold-transition sidebar-mini" oncontextmenu="return false" onkeydown="return false;"
-    onmousedown="return false;">
+<body>
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -183,10 +182,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                    <a href="{{ route('admin.appointmentlist') }}"
-                                        class="nav-link {{ request()->is('admin/appointmentlist*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.walkin') }}"
+                                        class="nav-link {{ request()->is('admin/walkin*') ? 'active' : '' }}">
                                         <i class="fa fa-list nav-icon"></i>
-                                        <p class="small">Appointment & Registration</p>
+                                        <p class="small">Registration & Appointment </p>
                                     </a>
                             </li>
                             </ul>

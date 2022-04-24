@@ -47,11 +47,11 @@ class appointment_walkin extends Model
     }
     public function walkin_user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(walkin_user::class, 'user_id', 'id');
     }
     public function employees()
     {
-        return $this->belongsTo(employee::class, 'id', 'emp_id');
+        return $this->belongsTo(employee::class, 'emp_id', 'id');
     }
     public function payments()
     {

@@ -11,12 +11,12 @@ class AdminController extends Controller
     {
         $GetTime = date('Y-m-d');
 
-        $GetMonth1 = date('2021-12');
-        $GetMonth2 = date('2022-01');
-        $GetMonth3 = date('2022-02');
-        $GetMonth4 = date('2022-03');
-        $GetMonth5 = date('2022-04');
-        $GetMonth6 = date('2022-05');
+        $GetMonth1 = date('2022-02');
+        $GetMonth2 = date('2022-03');
+        $GetMonth3 = date('2022-04');
+        $GetMonth4 = date('2022-05');
+        $GetMonth5 = date('2022-06');
+        $GetMonth6 = date('2022-07');
 
         $approvalAppointment = appointment::WHERE('status', 2)
             ->count();

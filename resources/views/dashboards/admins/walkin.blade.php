@@ -102,6 +102,14 @@
             </div>
             </div>
 
+            <div class="form-group ">
+                <label>Employee Name</label>
+                    <select class="form-control text-left"  name="emp_id">
+                        @foreach ($employee as $employees)
+                            <option value={{ $employees->id }}>{{ $employees->fullname }}</option>
+                        @endforeach
+                    </select>
+            </div>
       </div> 
                 <div class="card-body p-3">
                 <p>Choose your type of repair</p>

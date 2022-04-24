@@ -115,7 +115,7 @@
             var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
 
             var areaChartData = {
-                labels: ['December', 'January', 'Febuary', 'March', 'April', 'May'],
+                labels: ['Febuary', 'March', 'April', 'May', 'June', 'July'],
                 datasets: [{
                     label: 'Digital Goods',
                     backgroundColor: 'rgba(60,141,188,0.9)',

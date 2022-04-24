@@ -42,8 +42,8 @@
                             <td>{{ $appointments->clothes->clothesName }} </td>
                             <td>{{ $appointments->repair->repairName }}</td>
                             <td>{{ $appointments->appointment_date }}</td>
-                            <td>{{ $appointments->pickup_date ? $appointments->pickup_date : 'N/A' }}</td>
-                            <td>{{ $appointments->payments->reference_number ? $appointments->payments->reference_number : 'N/A'}}</td>
+                            <td>{{ $appointments->pickup_date ?? 'N/A' }}</td>
+                            <td>{{ $appointments->payments->reference_number ?? 'N/A'}}</td>
                             <td>{{ $appointments->totalAmount }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-block btn-primary btn-sm confirmPayments"

@@ -187,6 +187,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <i class="fa fa-list nav-icon"></i>
                                         <p class="small">Registration & Appointment </p>
                                     </a>
+                                    <a href="{{ route('admin.walkinDisplay') }}"
+                                        class="nav-link {{ request()->is('admin/walkinDisplay*') ? 'active' : '' }}">
+                                        <i class="fa fa-list nav-icon"></i>
+                                        <p class="small">List of appointment</p>
+                                    </a>
                             </li>
                             </ul>
                         </li>
@@ -235,6 +240,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="nav-icon fas fa-cog"></i>
                                 <p>
                                     Settings
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.reports') }}"
+                                class="nav-link {{ request()->is('admin/reports*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-file"></i>
+                                <p>
+                                    Reports
                                 </p>
                             </a>
                         </li>

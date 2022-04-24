@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminAssignController;
 use App\Http\Controllers\Admin\AdminPickupDateandTime;
 use App\Http\Controllers\Admin\AdminPendingPaymentController;
 use App\Http\Controllers\Admin\AdminWalkinController;
+use App\Http\Controllers\Admin\AdminPrint;
 
 use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\SmsController;
@@ -84,6 +85,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
 
     //Walkin page
     Route::get('walkin', [AdminWalkinController::class, 'index'])->name('admin.walkin');
+    Route::get('walkinDisplay', [AdminWalkinController::class, 'showListofWalkins'])->name('admin.walkinDisplay');
     Route::post('insertWalkin', [AdminWalkinController::class, 'store'])->name('admin.walkinStore');
 
 
@@ -93,6 +95,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventB
     Route::GET('getAmount/{id}', [AppointmentController::class, 'getAmount']);
     Route::GET('getAmount_Fabric/{id}', [AppointmentController::class, 'getAmount_Fabric']);
     Route::POST('getAmount', [AppointmentController::class, 'getAmount'])->name('getAmount');
+
+
+    //REPORTS
+    Route::get('reports', [AdminPrint::class, 'index'])->name('admin.reports');
+    Route::get('daily', [AdminPrint::class, 'daily'])->name('admin.daily');
+    Route::get('weekly', [AdminPrint::class, 'weekly'])->name('admin.weekly');
+    Route::get('mohtly', [AdminPrint::class, 'mohtly'])->name('admin.mohtly');
+
+    //Ecommerce
+    Route::get('ecommercedaily', [AdminPrint::class, 'ecommerceDaily'])->name('admin.ecommercedaily');
+    Route::get('ecommerceweekly', [AdminPrint::class, 'ecommerceweekly'])->name('admin.ecommerceweekly');
+    Route::get('ecommercemohtly', [AdminPrint::class, 'ecommercemohtly'])->name('admin.ecommercemohtly');
+
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackHistory']], function () {

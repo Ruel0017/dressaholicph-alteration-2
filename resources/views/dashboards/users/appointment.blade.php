@@ -44,7 +44,7 @@
                 <div class="tab-content">
                     <!-- REPAIR TAB -->
                     <div class="active tab-pane" id="Repair" style="">
-                        <form method="POST" action="{{ route('user.CreateAppointment') }}">
+                        <form method="POST" action="{{ route('user.CreateAppointment') }}"  id="FormRepair">
                             @csrf
                             <div class="form-group">
                                 <div class="row">
@@ -94,13 +94,13 @@
                                             <input class="form-control" type="text" name="amount" id="amount" value="" readonly>
                                         </div>
                                         {{-- <input class="form-control" type="text" name="" value="{{$repairPrice}}" readonly> --}} <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-primary" onclick="submitDetailsForm(1)">Submit</button>
                                 </form>
                                 </div>
                             </div>
                             <!-- CUSTOM MADE TAB -->
                             <div class="tab-pane" id="CustomMade">
-                                <form method="POST" action="{{ route('user.CreateAppFabric') }}">
+                                <form  method="POST" action="{{ route('user.CreateAppFabric') }}" id="FormFabric" >
                                     @csrf
                                     <div class="form-group">
                                         <div class="row">
@@ -112,7 +112,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <label for="time">Time</label>
-                                                <select class="form-control text-left" name="time_fabric">
+                                                <select class="form-control text-left" name="time_fabric" required> 
                                                     <option selected value="">Please Select Your Time</option>
                                                     <option value="8:00 AM">8:00 AM</option>
                                                     <option value="9:00 AM">9:00 AM</option>
@@ -162,7 +162,7 @@
                                                             readonly>
                                                     </div>
                                                     {{-- <input class="form-control" type="text" name="" value="{{$repairPrice}}" readonly> --}} <div class="card-footer">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                        <button type="button"  class="btn btn-primary" onclick="submitDetailsForm(2)">Submit</button>
                                             </form>
                                         </div>
                                     </div>
@@ -172,7 +172,27 @@
 
                             </div>
                             </div>
-                            <script type="text/javascript">
+                            <script type="text/javascript"> 
+
+                                function submitDetailsForm(e) {
+                                let text = "Are you sure to save your Appointment?";
+                                if (confirm(text) == true) {
+                                    if(e == 1)
+                                    {
+                                        $("#FormRepair").submit(); 
+                                    }
+                                    else
+                                    {
+                                        $("#FormFabric").submit(); 
+                                    } 
+                                } 
+                                else 
+                                {
+                                return false;
+                                } 
+                                }
+
+
                                 //Date picker
                                 var date = new Date();
                                 date.setDate(date.getDate());
@@ -330,13 +350,13 @@
                                     });
                                 });
 
-                                $(document).ready(function() {
+                                $(document).ready(function() {                                
                                     var a = [];
                                     $('#fabric').on('change', function() {
                                         var fabricID = $(this).val();
                                         var clothesID = $('#clothes_Fabric').val();
                                         console.log(fabricID)
-                                        console.log(clothesID)
+                                        console.log(clothesID)                                       
                                         if (fabricID) {
                                             $.ajax({
                                                 url: 'user/getAmount_Fabric/' + clothesID + ',' + fabricID,

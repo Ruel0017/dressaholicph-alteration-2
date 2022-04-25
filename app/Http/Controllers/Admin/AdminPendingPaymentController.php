@@ -20,10 +20,13 @@ class AdminPendingPaymentController extends Controller
     }
 
     public function updatepaymentstatus(Request $request)
-    {    
+    {   
+        $status =  $request->input('status');
+         
+
         $getID = $request->input('ids2');
         $AssignEmp = appointment::find($getID);
-        $AssignEmp->status = '8';
+        $AssignEmp->status = $status;
         $AssignEmp->save();
         return redirect()->back()->with('success', 'Successfully Updated');
     }

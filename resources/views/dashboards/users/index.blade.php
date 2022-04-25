@@ -18,6 +18,9 @@
                     {{ Session::get('error') }}
                 </div>
             @endif
+            <form method="GET" action="{{ route('user.generateReport') }}">
+                <button type="submit" class="btn btn-primary" id="btnCheck">Generate Report</button>
+            </form>
             <table id="listOfappointment" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -125,24 +128,24 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="accountnumber">Account Number</label>
-                                    <input type="text" class="form-control" name="accountnumber" placeholder="" required>
+                                    <input type="text" class="form-control" id="accountnumber" name="accountnumber" placeholder="" required>
                                     <span class="text-danger">@error('accountnumber'){{ $message }}@enderror</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="accountname">Account Name</label>
-                                        <input type="text" class="form-control" name="accountname" placeholder="" required>
+                                        <input type="text" class="form-control" id="accountname" name="accountname" placeholder="" required>
                                         <span class="text-danger">@error('accountname'){{ $message }}@enderror</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                     <label for="referenceno">Reference No</label>
-                                    <input type="text" class="form-control" name="referenceno" placeholder="" required>
+                                    <input type="text" class="form-control" id="referenceno" name="referenceno" placeholder="" required>
                                     <span class="text-danger">@error('referenceno'){{ $message }}@enderror</span>
                             </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
                                         </button>
-                                        <button type="submit" class="btn btn-primary">Save</button>
+                                        <button type="button"  class="btn btn-primary" onclick="submitDetailsForm(1)">Save</button> 
                                     </div>
                                 </div>
                             </form>
@@ -162,6 +165,30 @@
                             this.value = this.value.replace(/\D/g, '');
                         }
                     });
+
+                    function submitDetailsForm(e) 
+                    { 
+                        if ( $.trim($("#accountname").val()) == "" || $.trim($("#accountnumber").val()) == "" || $.trim($("#referenceno").val()) == "" ) 
+                            {
+                                alert("Please enter all fields.");
+                                return false;
+                            }
+                        else
+                        {
+                            let text = "NOTE: Please be advise that the store has implemented a NO REFUND policy. Make sure that your REFERENCE NO. is CORRECT.";
+                            if (confirm(text) == true) {
+                                if(e == 1)
+                                { 
+                                    $("#editStatus").submit();  
+                                } 
+                            } 
+                            else 
+                            {
+                                return false;
+                            }
+                        }
+                    }
+
                 </script>
 
 

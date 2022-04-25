@@ -114,7 +114,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li> 
 
                         <li class="nav-item">
-                            @if (\Auth::user()->is_guest == 0)
                                 <a href="#" class="nav-link ">
                                     <i class="nav-icon fas fa-table"></i>
                                     <p>
@@ -122,15 +121,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <i class="fas fa-angle-left right"></i>
                                     </p>
                                 </a>
-                            @else
-                                <a href="#" class="nav-link disabled">
-                                    <i class="nav-icon fas fa-table"></i>
-                                    <p>
-                                        Appointment
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                            @endif
                             <ul class="nav nav-treeview">
                             <li class="nav-item">
                                     <a href="{{ route('admin.appointmentlist') }}"

@@ -68,7 +68,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('user.Ecommerce_CheckOut') }}"  >
+                <form method="POST" action="{{ route('user.Ecommerce_CheckOut') }}" id="FormCheckout" >
                     @csrf
                     <div class="modal-body">
                         <!-- <div class="callout callout-danger">
@@ -124,24 +124,24 @@
                             </div>
                             <div class="form-group">
                                     <label for="accountname">Account No.</label>
-                                    <input type="text" class="form-control" name="accountname" placeholder="" required>
+                                    <input type="text" class="form-control" id="accountname" name="accountname" placeholder="" required>
                                     <span class="text-danger">@error('accountname'){{ $message }}@enderror</span>
                             </div>
                             <div class="form-group">
                                     <label for=" accountnumber">Account Name</label>
-                                    <input type="text" class="form-control" name="accountnumber" placeholder="" required>
+                                    <input type="text" class="form-control" id="accountnumber" name="accountnumber" placeholder="" required>
                                     <span class="text-danger">@error('accountnumber'){{ $message }}@enderror</span>
                                     </div>
                             </div>
                             <div class="form-group">
                                     <label for="referenceno">Reference No</label>
-                                    <input type="text" class="form-control" name="referenceno" placeholder="" required>
+                                    <input type="text" class="form-control" id="referenceno" name="referenceno" placeholder="" required>
                                     <span class="text-danger">@error('referenceno'){{ $message }}@enderror</span>
                             </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
                                         </button>
-                                        <button type="submit" class="btn btn-primary">Save</button>
+                                        <button type="button"  class="btn btn-primary" onclick="submitDetailsForm(1)">Save</button> 
                                     </div>
                                 </div>
                             </form>
@@ -152,6 +152,31 @@
 
    
 <script type="text/javascript">
+
+     
+function submitDetailsForm(e) 
+{ 
+    if ( $.trim($("#accountname").val()) == "" || $.trim($("#accountnumber").val()) == "" || $.trim($("#referenceno").val()) == "" ) 
+        {
+            alert("Please enter all fields.");
+            return false;
+        }
+        else
+        {
+            let text = "NOTE: Please be advise that the store has implemented a NO REFUND policy. Make sure that your REFERENCE NO. is CORRECT.";
+            if (confirm(text) == true) {
+                if(e == 1)
+                { 
+                        $("#FormCheckout").submit();  
+                } 
+            } 
+            else 
+            {
+                return false;
+            }
+        }
+}
+ 
   
     $(".update-cart").change(function (e) {
         e.preventDefault();

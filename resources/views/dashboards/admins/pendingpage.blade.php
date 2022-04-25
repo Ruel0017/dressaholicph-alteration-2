@@ -21,7 +21,7 @@
             <table id="example" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" hidden>Status</th>
+                    <th scope="col" hidden>Status</th>
                         <th scope="col">Status</th>
                         <th scope="col">Name</th>
                         <th scope="col">Clothes</th>
@@ -47,8 +47,7 @@
                             <td>{{ $appointments->totalAmount }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-block btn-primary btn-sm confirmPayments"
-                                    data-toggle="modal" data-idUpdate="''" data-target="#updatePaymentStatus">Perform
-                                    Action</button>
+                                    data-toggle="modal" data-idUpdate="''" data-target="#updatePaymentStatus">Accept Payment</button>
                             </td>
                         </tr>
                     @endforeach
@@ -105,13 +104,19 @@
                     {{ csrf_field() }}
                     <input type="text" hidden class="col-sm-9 form-control" id="idUpdate" name="idUpdate" value="" />
                     <div class="modal-body">
-                        <input type="text" id="e_ids2" name="ids2" class="form-control" hidden />
+                    <input type="text" id="e_ids2" name="ids2" class="form-control" hidden />
+                        <h5>Are you sure to Confirm this payment?</h5>
+                            <select class="form-control text-left" name="status">
+                                <option selected value="">Update Status</option>
+                                <option value="1">Denied</option>
+                                <option value="8">Approved</option>`
+                            </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i
                                 class="icofont icofont-eye-alt"></i>Close</button>
                         <button type="submit" id="" name="" class="btn btn-success  waves-light"><i
-                                class="icofont icofont-check-circled"></i>Update</button>
+                                class="icofont icofont-check-circled"></i>Confirm</button>
                     </div>
                 </form>
             </div>

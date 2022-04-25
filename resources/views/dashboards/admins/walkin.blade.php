@@ -435,20 +435,31 @@
 
                                 //END OF FABRIC AJAX
 
-                                function formSubmit() 
-         {
-            if ( $.trim($("#fname").val()) == "" || $.trim($("#mname").val()) == "" || $.trim($("#lname").val()) == "" ) 
-            {
-                alert("Please enter full name.");
-                return false;
-            }
+                function formSubmit() 
+                        {
+                            if ( $.trim($("#fname").val()) == "" || $.trim($("#mname").val()) == "" || $.trim($("#lname").val()) == "" ) 
+                            {
+                                alert("Please enter full name.");
+                                return false;
+                            }
 
-            if ( $.trim($("#gender").val()) == "" || $.trim($("#mobilenumber").val()) == "" ) 
-            {
-                alert("Please enter Gender and Mobile Number.");
-                return false;
-            }
-        }
+                            if ( $.trim($("#gender").val()) == "" || $.trim($("#mobilenumber").val()) == "" ) 
+                            {
+                                alert("Please enter Gender and Mobile Number.");
+                                return false;
+                            }
+                            
+                            let text = "Are you sure to save this Walk in application?";
+                            if (confirm(text) == true) 
+                            {
+                                
+                            } 
+                            else 
+                            {
+                                return false;
+                            }
+                    }
+        
 
         $('#btnCheck, #btnCheck2').click(formSubmit);    
                             </script>

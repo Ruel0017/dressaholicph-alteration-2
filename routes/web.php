@@ -137,6 +137,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
     Route::GET('getAmount/{id}', [AppointmentController::class, 'getAmount']);
     Route::GET('getAmount_Fabric/{id}', [AppointmentController::class, 'getAmount_Fabric']);
     Route::POST('getAmount', [AppointmentController::class, 'getAmount'])->name('getAmount');
+
+    Route::get('generateReport', [AppointmentController::class, 'generateReport'])->name('user.generateReport');
 });
 
 

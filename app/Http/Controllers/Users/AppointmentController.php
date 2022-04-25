@@ -12,6 +12,10 @@ use App\Models\payment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Nexmo\Laravel\Facade\Nexmo;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use PDF;
+use Illuminate\Support\Str;
 
 class AppointmentController extends Controller
 {
@@ -280,5 +284,27 @@ class AppointmentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function generateReport(){
+        $UsersAuth = auth()->user()->id;
+        $date =  date('Y-m-d');
+        $Reports = 'All transaction';
+        $image = base64_encode(file_get_contents(public_path('img/HomePageImg/Dressaholic_logo.png')));
+        $title = 'Dressaholicph';
+        $address = 'Dona Isidora St. Don Antonio Quezon City';
+        $contactNumber = '+63 995 270 6395';
+        $refNumber = Str::random(30);
+
+        $dt = Carbon::now(); 
+        $DateToday = $dt->toFormattedDateString(); 
+
+        $dailyReport = appointment::where('user_id', $UsersAuth)
+        ->get();
+
+        $pdf = PDF::loadView('appointmentPDF', compact('title', 'image', 'date', 'address', 'contactNumber', 
+            'refNumber', 'dailyReport','Reports','DateToday'));
+
+        return $pdf->download('ListOfTransaction.pdf');
     }
 }
